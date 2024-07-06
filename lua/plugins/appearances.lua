@@ -8,13 +8,6 @@ return { -- the colorscheme should be available when starting Neovim
         vim.cmd([[colorscheme tokyonight]])
     end
 }, {
-    "nvim-tree/nvim-web-devicons",
-    enabled = true,
-    lazy = false,
-    config = function()
-        require("nvim-web-devicons").setup()
-    end
-}, {
     'nvim-lualine/lualine.nvim',
     dependencies = {'nvim-tree/nvim-web-devicons'},
     config = function()
