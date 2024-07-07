@@ -22,6 +22,9 @@ return {
                             width = 0.9,
                             height = 0.9,
                             preview_cutoff = 0,
+                        },
+                        preview = {
+                            msg_bg_fillchar = " ",
                         }
                     }
                 }
