@@ -23,3 +23,4 @@ require("lazy").setup("plugins")
 
 -- Load other settings
 require("options")
+require("keymaps")
