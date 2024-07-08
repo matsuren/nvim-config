@@ -42,7 +42,8 @@ return {
                 },
                 filesystem = {
                     filtered_items = {hide_dotfiles = false},
-                    hijack_netrw_behavior = "open_default",
+                    -- hijack_netrw_behavior = "open_default",
+                    hijack_netrw_behavior = "disabled",
                 }
             }
         )
