@@ -48,4 +48,19 @@ return {
             }
         )
     end
+},
+{
+    'stevearc/oil.nvim',
+    opts = {},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+        local configs =
+            require("oil").setup({default_file_explorer = false, keymaps = {
+                ["<C-s>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+                ["<C-h>"] = false,
+                ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+                ["gx"] = false,
+            }})
+    end
+
 }}

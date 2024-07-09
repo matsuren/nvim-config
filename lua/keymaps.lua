@@ -11,4 +11,5 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {desc="Find help tags"})
 
 --  File explore 
 vim.keymap.set('n', '<leader>fe', "<Cmd>Neotree toggle<CR>", {desc="File explore"})
+vim.keymap.set("n", "<leader>fo", "<Cmd>Oil --float<CR>", { desc = "Open parent directory" })
 
