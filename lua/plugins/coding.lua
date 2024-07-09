@@ -33,5 +33,14 @@ return {
 	"lewis6991/gitsigns.nvim",
 	version = "0.9.0",
 	config = true,
-}
+},
+{
+    "rhysd/committia.vim",
+    lazy = false,
+    ft = "gitcommit",
+    config = function()
+        vim.g.committia_min_window_width = 140
+        vim.g.committia_edit_window_width = 90
+    end,
+},
 }
