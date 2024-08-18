@@ -9,6 +9,8 @@ local options = {
     cursorline = true,
     wrap = false,
     number = true,
+    relativenumber = true,
+    cursorline = true,
     undofile = true,
     updatetime = 300,
     -- Scroll
