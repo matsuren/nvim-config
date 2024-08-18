@@ -14,8 +14,8 @@ local options = {
     undofile = true,
     updatetime = 300,
     -- Scroll
-    scrolloff = 10,
-    sidescrolloff = 10,
+    scrolloff = 4,
+    sidescrolloff = 8,
     -- Tab, indent
     smarttab = true,
     expandtab = true,
