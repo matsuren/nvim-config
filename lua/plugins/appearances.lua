@@ -8,9 +8,23 @@ return { -- the colorscheme should be available when starting Neovim
             vim.cmd([[colorscheme tokyonight]])
         end
     }, {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-        require('lualine').setup()
-    end
-} }
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+            require('lualine').setup()
+        end
+    },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        opts = {},
+        config = function()
+            local ibl = require("ibl")
+            ibl.setup({
+                scope = {
+                    enabled = false,
+                },
+            })
+        end,
+    },
+}
