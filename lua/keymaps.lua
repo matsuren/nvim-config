@@ -12,3 +12,12 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Find help tags" }
 --  File explore
 vim.keymap.set('n', '<leader>fe', "<Cmd>Neotree toggle<CR>", { desc = "File explore" })
 vim.keymap.set("n", "<leader>fo", "<Cmd>Oil --float<CR>", { desc = "Open parent directory" })
+
+-- LSP
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Go definition" })
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go declaration" })
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "Go reference" })
+vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = "Code action" })
+vim.keymap.set('n', '<leader>cf', function()
+    vim.lsp.buf.format { async = true }
+end, { desc = "Code format" })

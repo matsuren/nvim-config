@@ -68,7 +68,11 @@ return {
             }
         end
     },
-    -- {
-    --     "neovim/nvim-lspconfig",
-    -- }
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            local lspconfig = require('lspconfig')
+            lspconfig.lua_ls.setup({})
+        end
+    }
 }
