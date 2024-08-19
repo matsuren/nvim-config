@@ -6,7 +6,6 @@ local options = {
     swapfile = false,
     visualbell = true,
     errorbells = true,
-    cursorline = true,
     wrap = false,
     number = true,
     relativenumber = true,
