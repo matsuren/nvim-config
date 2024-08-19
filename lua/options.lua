@@ -27,7 +27,7 @@ local options = {
     smartcase = true,
     wrapscan = true,
     -- Clipboard
-    clipboard = "unnamedplus"
+    clipboard = "unnamedplus",
 }
 
 for k, v in pairs(options) do

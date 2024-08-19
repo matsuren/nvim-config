@@ -1,4 +1,4 @@
-return { -- the colorscheme should be available when starting Neovim
+return {
     {
         "folke/tokyonight.nvim",
         lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -6,13 +6,14 @@ return { -- the colorscheme should be available when starting Neovim
         config = function()
             -- load the colorscheme here
             vim.cmd([[colorscheme tokyonight]])
-        end
-    }, {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        end,
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
-            require('lualine').setup()
-        end
+            require("lualine").setup()
+        end,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
@@ -32,5 +33,5 @@ return { -- the colorscheme should be available when starting Neovim
         opts = {
             -- options
         },
-    }
+    },
 }

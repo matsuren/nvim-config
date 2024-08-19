@@ -5,29 +5,27 @@ return {
         config = function()
             local configs = require("nvim-treesitter.configs")
 
-            configs.setup(
-                {
-                    ensure_installed = {
-                        "c",
-                        "lua",
-                        "vim",
-                        "vimdoc",
-                        "go",
-                        "cmake",
-                        "python",
-                        "rust",
-                        "javascript",
-                        "html",
-                        "arduino",
-                        "markdown",
-                        "markdown_inline"
-                    },
-                    sync_install = false,
-                    highlight = { enable = true },
-                    indent = { enable = true }
-                }
-            )
-        end
+            configs.setup({
+                ensure_installed = {
+                    "c",
+                    "lua",
+                    "vim",
+                    "vimdoc",
+                    "go",
+                    "cmake",
+                    "python",
+                    "rust",
+                    "javascript",
+                    "html",
+                    "arduino",
+                    "markdown",
+                    "markdown_inline",
+                },
+                sync_install = false,
+                highlight = { enable = true },
+                indent = { enable = true },
+            })
+        end,
     },
     {
         "lewis6991/gitsigns.nvim",
@@ -47,32 +45,31 @@ return {
         "williamboman/mason.nvim",
         config = function()
             local configs = require("mason")
-            configs.setup(
-                {
-                    ui = {
-                        icons = {
-                            package_installed = "✓",
-                            package_pending = "➜",
-                            package_uninstalled = "✗"
-                        }
-                    }
-                }
-            )
-        end
+            configs.setup({
+                ui = {
+                    icons = {
+                        package_installed = "✓",
+                        package_pending = "➜",
+                        package_uninstalled = "✗",
+                    },
+                },
+            })
+        end,
     },
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
-            require("mason-lspconfig").setup {
+            require("mason-lspconfig").setup({
                 ensure_installed = { "lua_ls", "rust_analyzer" },
-            }
-        end
+            })
+        end,
     },
     {
         "neovim/nvim-lspconfig",
         config = function()
-            local lspconfig = require('lspconfig')
+            local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup({})
-        end
-    }
+            lspconfig.rust_analyzer.setup({})
+        end,
+    },
 }
