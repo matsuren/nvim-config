@@ -27,4 +27,10 @@ return { -- the colorscheme should be available when starting Neovim
             })
         end,
     },
+    {
+        "j-hui/fidget.nvim",
+        opts = {
+            -- options
+        },
+    }
 }
