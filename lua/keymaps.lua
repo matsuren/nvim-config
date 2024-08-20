@@ -21,3 +21,10 @@ vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Co
 vim.keymap.set("n", "<leader>cf", function()
     vim.lsp.buf.format({ async = true })
 end, { desc = "Code format" })
+
+-- Git
+-- vim.keymap.set("n", "<leader>gp", "<Cmd>Gitsigns preview_hunk_inline<CR>", { desc = "Git hunk preview inline" })
+vim.keymap.set("n", "<leader>gp", "<Cmd>Gitsigns preview_hunk<CR>", { desc = "Git hunk preview" })
+vim.keymap.set("n", "<leader>gt", "<Cmd>Gitsigns toggle_current_line_blame<CR>", { desc = "Git toggle line blame" })
+vim.keymap.set("n", "<leader>gd", "<Cmd>Gitsigns diffthis<CR>", { desc = "Git diff this (:Gvdiff branch)" })
+
