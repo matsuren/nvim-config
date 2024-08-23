@@ -27,13 +27,13 @@ end
 vim.keymap.set("n", "<leader>ci", toggle_inlay_hints, { desc = "Toggle inlay hint" })
 
 -- Git
--- vim.keymap.set("n", "<leader>gp", "<Cmd>Gitsigns preview_hunk_inline<CR>", { desc = "Git hunk preview inline" })
-vim.keymap.set("n", "<leader>gp", "<Cmd>Gitsigns preview_hunk<CR>", { desc = "Git hunk preview" })
-vim.keymap.set("n", "<leader>gt", "<Cmd>Gitsigns toggle_current_line_blame<CR>", { desc = "Git toggle line blame" })
-vim.keymap.set("n", "<leader>gd", "<Cmd>Gitsigns diffthis<CR>", { desc = "Git diff this (:Gvdiff branch)" })
-vim.keymap.set("n", "<leader>gb", "<Cmd>Gitsigns blame<CR>", { desc = "Git blame" })
-vim.keymap.set("n", "<leader>gs", "<Cmd>Neogit<CR>", { desc = "Git status with neogit" })
-vim.keymap.set("n", "<leader>gl", "<Cmd>0Gclog<CR>", { desc = "Git log for current file" })
-vim.keymap.set("n", "<leader>gh", "<Cmd>DiffviewFileHistory %<CR>", { desc = "Git log for current file" })
-vim.keymap.set("n", "<leader>gH", "<Cmd>DiffviewFileHistory<CR>", { desc = "Git log for current branch" })
+-- vim.keymap.set("n", "<leader>cp", "<Cmd>Gitsigns preview_hunk_inline<CR>", { desc = "Git hunk preview inline" })
+vim.keymap.set("n", "<leader>cp", "<Cmd>Gitsigns preview_hunk<CR>", { desc = "Git hunk preview" })
+vim.keymap.set("n", "<leader>ct", "<Cmd>Gitsigns toggle_current_line_blame<CR>", { desc = "Git toggle line blame" })
+vim.keymap.set("n", "<leader>cd", "<Cmd>Gitsigns diffthis<CR>", { desc = "Git diff this (:Gvdiff branch)" })
+vim.keymap.set("n", "<leader>cb", "<Cmd>Gitsigns blame<CR>", { desc = "Git blame" })
+vim.keymap.set("n", "<leader>cs", "<Cmd>Neogit<CR>", { desc = "Git status with neogit" })
+vim.keymap.set("n", "<leader>cl", "<Cmd>0Gclog<CR>", { desc = "Git log for current file" })
+vim.keymap.set("n", "<leader>ch", "<Cmd>DiffviewFileHistory %<CR>", { desc = "Git log for current file" })
+vim.keymap.set("n", "<leader>cH", "<Cmd>DiffviewFileHistory<CR>", { desc = "Git log for current branch" })
 
