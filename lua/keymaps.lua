@@ -1,3 +1,8 @@
+-- Basic
+-- Disable F1 help menu
+vim.api.nvim_set_keymap('n', '<F1>', '<Nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<F1>', '<Nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<F1>', '<Nop>', { noremap = true, silent = true })
 -- Telescope
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
