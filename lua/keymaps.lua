@@ -36,3 +36,32 @@ vim.keymap.set("n", "<leader>cs", "<Cmd>Neogit<CR>", { desc = "Git status with n
 vim.keymap.set("n", "<leader>cl", "<Cmd>0Gclog<CR>", { desc = "Git log for current file" })
 vim.keymap.set("n", "<leader>ch", "<Cmd>DiffviewFileHistory %<CR>", { desc = "Git log for current file" })
 vim.keymap.set("n", "<leader>cH", "<Cmd>DiffviewFileHistory<CR>", { desc = "Git log for current branch" })
+
+-- Terminal
+vim.keymap.set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>", { desc = "Open terminal vertically" })
+local Terminal = require("toggleterm.terminal").Terminal
+local ipython = Terminal:new({
+  cmd = "ipython3",
+  direction = "vertical",
+})
+vim.keymap.set("n", "<leader>tp", function()
+  ipython:toggle()
+end, { desc = "Open IPython vertically" })
+
+function _G.set_terminal_keymaps()
+    local opts = { noremap = true }
+    vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
+    vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
+    vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
+    vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
+    vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
+    vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
+    vim.keymap.set("n", "<leader>ts", "<Cmd>ToggleTermSendCurrentLine<CR>", { desc = "Send current line to terminal" })
+    -- vim.keymap.set("v", "<leader>ts", "<Cmd>ToggleTermSendVisualLines<CR>", { desc = "Send selected line to terminal" })
+    vim.keymap.set("v", "<leader>ts", function()
+        vim.api.nvim_feedkeys('"+y', "v", true)
+        require("toggleterm").exec("%paste", 1)
+    end, { desc = "Send @paste to terminal for ipython" })
+end
+
+vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
