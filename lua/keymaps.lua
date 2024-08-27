@@ -31,6 +31,16 @@ vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Co
 vim.keymap.set("n", "<leader>cf", function()
     vim.lsp.buf.format({ async = true })
 end, { desc = "Code format" })
+vim.keymap.set("v", "<leader>cf", function()
+    vim.lsp.buf.format({
+        async = true,
+        range = {
+            ["start"] = { vim.fn.line("v"), vim.fn.col("v") - 1 },
+            ["end"] = { vim.fn.line("."), vim.fn.col(".") - 1 },
+        },
+    })
+    vim.api.nvim_input("<esc>")
+end, { desc = "Code format in selected lines", noremap = true, silent = true })
 local function toggle_inlay_hints()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end
