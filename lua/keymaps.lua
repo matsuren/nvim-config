@@ -1,4 +1,9 @@
 -- Basic
+-- Save with Ctrl + s
+vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<C-s>", "<Esc>:w<CR>gv", { noremap = true, silent = true })
+
 -- Disable F1 help menu
 vim.api.nvim_set_keymap('n', '<F1>', '<Nop>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<F1>', '<Nop>', { noremap = true, silent = true })
