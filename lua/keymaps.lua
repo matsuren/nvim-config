@@ -5,9 +5,10 @@ vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>", { noremap = true, silent = 
 vim.api.nvim_set_keymap("v", "<C-s>", "<Esc>:w<CR>gv", { noremap = true, silent = true })
 
 -- Disable F1 help menu
-vim.api.nvim_set_keymap('n', '<F1>', '<Nop>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<F1>', '<Nop>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<F1>', '<Nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F1>", "<Nop>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<F1>", "<Nop>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<F1>", "<Nop>", { noremap = true, silent = true })
+
 -- Telescope
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
@@ -61,13 +62,13 @@ vim.keymap.set("n", "<leader>cH", "<Cmd>DiffviewFileHistory<CR>", { desc = "Git 
 vim.keymap.set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>", { desc = "Open terminal vertically" })
 local Terminal = require("toggleterm.terminal").Terminal
 local ipython = Terminal:new({
-  cmd = "ipython3",
-  direction = "vertical",
+    cmd = "ipython3",
+    direction = "vertical",
 })
+-- Terminal ipython setting
 vim.keymap.set("n", "<leader>tp", function()
-  ipython:toggle()
+    ipython:toggle()
 end, { desc = "Open IPython vertically" })
-
 function _G.set_terminal_keymaps()
     local opts = { noremap = true }
     vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
@@ -83,5 +84,4 @@ function _G.set_terminal_keymaps()
         require("toggleterm").exec("%paste", 1)
     end, { desc = "Send @paste to terminal for ipython" })
 end
-
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
