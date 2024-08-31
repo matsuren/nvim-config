@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.api.nvim_create_autocmd("CursorHold", {
     pattern = "*",
-    command = "checktime",
+    command = "silent! checktime",
 })
 
 -- Handle insert mode apearing issue
