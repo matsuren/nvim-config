@@ -20,6 +20,7 @@ return {
                         {
                             "filename",
                             path = 1,
+                            color = { fg = "#cccccc" },
                         },
                     },
                     lualine_x = {
@@ -42,9 +43,27 @@ return {
                         {
                             "filename",
                             path = 3,
+                            color = { fg = "#bbbbbb" },
                         },
                     },
-                    lualine_x = { "location" },
+                    lualine_x = {
+                        {
+                            "encoding",
+                            color = { fg = "#aaaaaa" },
+                        },
+                        {
+                            "fileformat",
+                            color = { fg = "#aaaaaa" },
+                        },
+                        {
+                            "filetype",
+                            color = { fg = "#aaaaaa" },
+                        },
+                        {
+                            "location",
+                            color = { fg = "#aaaaaa" },
+                        },
+                    },
                     lualine_y = {},
                     lualine_z = {},
                 },
