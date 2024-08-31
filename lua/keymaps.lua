@@ -39,6 +39,9 @@ vim.keymap.set("n", "<leader>fj", builtin.jumplist, { desc = "Find jumplist" })
 vim.keymap.set("n", "<leader>fc", builtin.git_status, { desc = "Find changes" })
 vim.keymap.set("n", "<leader>fm", builtin.marks, { desc = "Find marks" })
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find help tags" })
+vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "Find quickfix" })
+vim.keymap.set("n", "<leader>fQ", builtin.quickfixhistory, { desc = "Find quickfix history" })
+vim.keymap.set("n", "<leader>fl", builtin.loclist, { desc = "Find loclist" })
 
 --  File explore
 vim.keymap.set("n", "<leader>fe", "<Cmd>Neotree toggle<CR>", { desc = "File explore" })
