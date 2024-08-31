@@ -27,7 +27,12 @@ return {
             "sindrets/diffview.nvim",
             "nvim-telescope/telescope.nvim",
         },
-        config = true,
+        config = function()
+            local neogit = require("neogit")
+            neogit.setup({
+                disable_insert_on_commit = true,
+            })
+        end,
     },
     {
         "tpope/vim-fugitive",
