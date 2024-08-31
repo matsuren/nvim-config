@@ -9,6 +9,26 @@ vim.api.nvim_set_keymap("n", "<F1>", "<Nop>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "<F1>", "<Nop>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<F1>", "<Nop>", { noremap = true, silent = true })
 
+-- vim-unimpaired like keymapping
+-- Navigate Quickfix List
+vim.keymap.set("n", "[q", ":cprevious<CR>", { silent = true, noremap = true, desc = "Previous quickfix item" })
+vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true, noremap = true, desc = "Next quickfix item" })
+vim.keymap.set("n", "[Q", ":cfirst<CR>", { silent = true, noremap = true, desc = "First quickfix item" })
+vim.keymap.set("n", "]Q", ":clast<CR>", { silent = true, noremap = true, desc = "Last quickfix item" })
+-- Navigate Location List
+vim.keymap.set("n", "[l", ":lprevious<CR>", { silent = true, noremap = true, desc = "Previous location list item" })
+vim.keymap.set("n", "]l", ":lnext<CR>", { silent = true, noremap = true, desc = "Next location list item" })
+vim.keymap.set("n", "[L", ":lfirst<CR>", { silent = true, noremap = true, desc = "First location list item" })
+vim.keymap.set("n", "]L", ":llast<CR>", { silent = true, noremap = true, desc = "Last location list item" })
+-- Navigate Buffers
+vim.keymap.set("n", "[b", ":bprevious<CR>", { silent = true, noremap = true, desc = "Previous buffer" })
+vim.keymap.set("n", "]b", ":bnext<CR>", { silent = true, noremap = true, desc = "Next buffer" })
+vim.keymap.set("n", "[B", ":bfirst<CR>", { silent = true, noremap = true, desc = "First buffer" })
+vim.keymap.set("n", "]B", ":blast<CR>", { silent = true, noremap = true, desc = "Last buffer" })
+-- Navigate Git hunk
+vim.keymap.set("n", "[c", "<Cmd>Gitsigns prev_hunk<CR>", { silent = true, noremap = true, desc = "Previous git hunk" })
+vim.keymap.set("n", "]c", "<Cmd>Gitsigns next_hunk<CR>", { silent = true, noremap = true, desc = "Next git hunk" })
+
 -- Telescope
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
