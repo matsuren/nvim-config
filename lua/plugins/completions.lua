@@ -3,6 +3,13 @@ return {
     { "hrsh7th/cmp-path" },
     { "hrsh7th/cmp-buffer" },
     {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup({})
+        end,
+    },
+    {
         "L3MON4D3/LuaSnip",
         config = function()
             require("luasnip").setup({})
@@ -40,6 +47,8 @@ return {
                     { name = "path", keyword_length = 3 },
                 }),
             })
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end,
     },
 }
