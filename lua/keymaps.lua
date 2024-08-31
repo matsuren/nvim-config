@@ -25,9 +25,6 @@ vim.keymap.set("n", "[b", ":bprevious<CR>", { silent = true, noremap = true, des
 vim.keymap.set("n", "]b", ":bnext<CR>", { silent = true, noremap = true, desc = "Next buffer" })
 vim.keymap.set("n", "[B", ":bfirst<CR>", { silent = true, noremap = true, desc = "First buffer" })
 vim.keymap.set("n", "]B", ":blast<CR>", { silent = true, noremap = true, desc = "Last buffer" })
--- Navigate Git hunk
-vim.keymap.set("n", "[c", "<Cmd>Gitsigns prev_hunk<CR>", { silent = true, noremap = true, desc = "Previous git hunk" })
-vim.keymap.set("n", "]c", "<Cmd>Gitsigns next_hunk<CR>", { silent = true, noremap = true, desc = "Next git hunk" })
 
 -- Telescope
 local builtin = require("telescope.builtin")
