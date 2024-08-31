@@ -122,6 +122,12 @@ return {
         end,
     },
     {
+        "NvChad/nvim-colorizer.lua",
+        config = function()
+            require("colorizer").setup({})
+        end,
+    },
+    {
         -- Loading ui on bottom right
         "j-hui/fidget.nvim",
         opts = {
