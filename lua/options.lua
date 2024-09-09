@@ -28,6 +28,8 @@ local options = {
     wrapscan = true,
     -- Clipboard
     clipboard = "unnamedplus",
+    -- Spell check
+    spell = true,
 }
 
 for k, v in pairs(options) do
