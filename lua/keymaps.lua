@@ -42,7 +42,7 @@ vim.keymap.set("n", "<leader>fl", builtin.loclist, { desc = "Find loclist" })
 
 --  File explore
 vim.keymap.set("n", "<leader>fe", "<Cmd>Neotree toggle<CR>", { desc = "File explore" })
-vim.keymap.set("n", "<leader>fo", "<Cmd>Oil --float<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "<leader>fo", "<Cmd>Oil --float<CR>", { desc = "Oil: Open parent directory" })
 
 -- LSP
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go definition" })
