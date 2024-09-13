@@ -22,16 +22,16 @@ vim.api.nvim_create_autocmd("WinLeave", {
     end,
 })
 
--- Hover hint from https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-line-diagnostics-automatically-in-hover-window
-vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-    group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
-    callback = function()
-        vim.diagnostic.config({
-            virtual_text = false,
-        })
-        vim.diagnostic.open_float(nil, { focus = false })
-    end,
-})
+-- -- Hover hint from https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-line-diagnostics-automatically-in-hover-window
+-- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+--     group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
+--     callback = function()
+--         vim.diagnostic.config({
+--             virtual_text = false,
+--         })
+--         vim.diagnostic.open_float(nil, { focus = false })
+--     end,
+-- })
 
 -- Close with q for DAP floating window https://github.com/mfussenegger/nvim-dap/issues/415#issuecomment-2230986168
 vim.api.nvim_create_autocmd("FileType", {
