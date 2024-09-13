@@ -32,3 +32,11 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
         vim.diagnostic.open_float(nil, { focus = false })
     end,
 })
+
+-- Close with q for DAP floating window https://github.com/mfussenegger/nvim-dap/issues/415#issuecomment-2230986168
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "dap-float",
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>close!<CR>", { noremap = true, silent = true })
+    end,
+})
