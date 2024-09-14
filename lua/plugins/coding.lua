@@ -102,23 +102,34 @@ return {
             end
 
             -- Python launch configuration
+            local pythonPathFn = function()
+                local cwd = vim.fn.getcwd()
+                if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+                    return cwd .. "/venv/bin/python"
+                elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+                    return cwd .. "/.venv/bin/python"
+                else
+                    return "python"
+                end
+            end
             dap.configurations.python = {
                 {
                     type = "python",
                     request = "launch",
                     name = "Launch file",
                     justMyCode = false,
+                    console = "integratedTerminal",
                     program = "${file}",
-                    pythonPath = function()
-                        local cwd = vim.fn.getcwd()
-                        if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-                            return cwd .. "/venv/bin/python"
-                        elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-                            return cwd .. "/.venv/bin/python"
-                        else
-                            return "python"
-                        end
-                    end,
+                    pythonPath = pythonPathFn,
+                },
+                {
+                    type = "python",
+                    request = "launch",
+                    name = "Launch file (justMyCode=true)",
+                    justMyCode = true,
+                    console = "integratedTerminal",
+                    program = "${file}",
+                    pythonPath = pythonPathFn,
                 },
             }
         end,
