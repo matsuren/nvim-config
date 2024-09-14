@@ -30,6 +30,8 @@ local options = {
     clipboard = "unnamedplus",
     -- Spell check
     spell = true,
+    -- Always show signcolumn to avoid flicking while debugging
+    signcolumn = "yes:1",
 }
 
 for k, v in pairs(options) do
