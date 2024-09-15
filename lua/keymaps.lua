@@ -25,6 +25,11 @@ vim.keymap.set("n", "[b", ":bprevious<CR>", { silent = true, noremap = true, des
 vim.keymap.set("n", "]b", ":bnext<CR>", { silent = true, noremap = true, desc = "Next buffer" })
 vim.keymap.set("n", "[B", ":bfirst<CR>", { silent = true, noremap = true, desc = "First buffer" })
 vim.keymap.set("n", "]B", ":blast<CR>", { silent = true, noremap = true, desc = "Last buffer" })
+-- Navigate Tabs
+vim.keymap.set("n", "[t", ":tabprevious<CR>", { silent = true, noremap = true, desc = "Previous tab" })
+vim.keymap.set("n", "]t", ":tabnext<CR>", { silent = true, noremap = true, desc = "Next tab" })
+vim.keymap.set("n", "[T", ":tabfirst<CR>", { silent = true, noremap = true, desc = "First tab" })
+vim.keymap.set("n", "]T", ":tablast<CR>", { silent = true, noremap = true, desc = "Last tab" })
 
 -- Telescope
 local builtin = require("telescope.builtin")
