@@ -134,11 +134,13 @@ vim.keymap.set({ "n", "v" }, "<Leader>dp", widgets.preview, { desc = "Debug UI: 
 vim.keymap.set("n", "<Leader>dc", dap.run_to_cursor, { desc = "Debug: Run to current cursor" })
 vim.keymap.set("n", "<Leader>dt", dap.terminate, { desc = "Debug: Terminate" })
 vim.keymap.set("n", "<Leader>dF", dap.focus_frame, { desc = "Debug: Focus frame" })
-vim.keymap.set("n", "<Leader>df", function()
-    -- jumping function is better than dapui
+vim.keymap.set("n", "<Leader>dF", function()
     widgets.centered_float(widgets.frames)
-end, { desc = "Debug UI: Show Frames" })
-local dapui_floating_opts = { width = 110, height = 30, enter = true, position = "center" }
+end, { desc = "Debug UI: Show Frames from dap" })
+local dapui_floating_opts = { width = 90, height = 30, enter = true, position = "center" }
+vim.keymap.set("n", "<Leader>df", function()
+    dapui.float_element("stacks", dapui_floating_opts)
+end, { desc = "Debug UI: Show Frames from dapui" })
 vim.keymap.set("n", "<Leader>ds", function()
     dapui.float_element("scopes", dapui_floating_opts)
 end, { desc = "Debug UI: Show Scopes" })
@@ -155,8 +157,9 @@ end, { desc = "Debug UI: Add to watches" })
 vim.keymap.set("n", "<Leader>dr", function()
     dapui.float_element("repl", dapui_floating_opts)
 end, { desc = "Debug: Toggle REPL" })
-
-vim.keymap.set("n", "<Leader>du", dapui.toggle, { desc = "DAP UI: Toggle" })
+vim.keymap.set("n", "<Leader>du", function()
+    dapui.toggle({ reset = true })
+end, { desc = "DAP UI: Toggle" })
 vim.keymap.set("n", "<Leader>dh", dapui.eval, { desc = "DAP UI: Hover Variables" })
 vim.keymap.set("v", "<Leader>dh", dapui.eval, { desc = "DAP UI: evaluate expression" })
 -- Auto close
