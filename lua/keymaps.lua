@@ -68,6 +68,7 @@ local function toggle_inlay_hints()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end
 vim.keymap.set("n", "<leader>ci", toggle_inlay_hints, { desc = "Toggle inlay hint" })
+vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 -- Git
 -- vim.keymap.set("n", "<leader>cp", "<Cmd>Gitsigns preview_hunk_inline<CR>", { desc = "Git hunk preview inline" })
