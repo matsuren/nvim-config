@@ -39,6 +39,7 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find help tags" }
 vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "Find quickfix" })
 vim.keymap.set("n", "<leader>fQ", builtin.quickfixhistory, { desc = "Find quickfix history" })
 vim.keymap.set("n", "<leader>fl", builtin.loclist, { desc = "Find loclist" })
+vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find symbols via lsp" })
 
 --  File explore
 vim.keymap.set("n", "<leader>fe", "<Cmd>Neotree toggle<CR>", { desc = "File explore" })
