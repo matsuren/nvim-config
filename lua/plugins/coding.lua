@@ -60,7 +60,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "rust_analyzer", "ruff", "pyright" },
+                ensure_installed = { "clangd", "lua_ls", "rust_analyzer", "ruff", "pyright" },
             })
         end,
     },
@@ -69,6 +69,18 @@ return {
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             local lspconfig = require("lspconfig")
+            -- PlatformIO setting
+            lspconfig.clangd.setup({
+                capabilities = capabilities,
+                cmd = {
+                    "clangd",
+                    "--background-index",
+                    "--query-driver="
+                        .. os.getenv("HOME")
+                        .. "/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-g*",
+                },
+                filetypes = { "c", "cpp" },
+            })
             lspconfig.ruff.setup({ capabilities = capabilities })
             lspconfig.pyright.setup({ capabilities = capabilities })
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
