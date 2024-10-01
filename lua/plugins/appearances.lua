@@ -127,6 +127,7 @@ return {
             require("colorizer").setup({
                 user_default_options = {
                     RGB = false, -- Disable #123
+                    names = false, -- Disable Red, Blue, etc.
                 },
             })
         end,
