@@ -63,6 +63,7 @@ vim.keymap.set("n", "<leader>cs", function()
     vim.lsp.buf.format({ async = false })
     vim.cmd("write")
 end, { desc = "Code format and save" })
+vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Code format" })
 vim.keymap.set("v", "<leader>cf", function()
     vim.lsp.buf.format({
         async = true,
