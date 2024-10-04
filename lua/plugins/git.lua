@@ -46,6 +46,14 @@ return {
         end,
     },
     {
+        "sindrets/diffview.nvim",
+        config = function()
+            require("diffview").setup({
+                enhanced_diff_hl = true, -- See |diffview-config-enhanced_diff_hl|
+            })
+        end,
+    },
+    {
         "NeogitOrg/neogit",
         dependencies = {
             "nvim-lua/plenary.nvim",
