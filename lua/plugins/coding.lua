@@ -84,7 +84,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "clangd", "lua_ls", "rust_analyzer", "ruff", "pyright" },
+                ensure_installed = { "clangd", "lua_ls", "rust_analyzer", "ruff", "pyright", "jsonls" },
             })
         end,
     },
@@ -108,6 +108,7 @@ return {
             lspconfig.ruff.setup({ capabilities = capabilities })
             lspconfig.pyright.setup({ capabilities = capabilities })
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
+            lspconfig.jsonls.setup({ capabilities = capabilities })
             vim.lsp.inlay_hint.enable(true)
         end,
     },
@@ -235,5 +236,72 @@ return {
         keys = {
             { "<leader>cv", "<cmd>VenvSelect<cr>" },
         },
+    },
+    {
+        "stevearc/aerial.nvim",
+        opts = {},
+        -- Optional dependencies
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            require("aerial").setup({
+                -- optionally use on_attach to set keymaps when aerial has attached to a buffer
+                on_attach = function(bufnr)
+                    -- Navigate Outline by aerial.nivm
+                    vim.keymap.set(
+                        "n",
+                        "[o",
+                        ":AerialPrev<CR>",
+                        { buffer = bufnr, silent = true, noremap = true, desc = "Previous outline item" }
+                    )
+                    vim.keymap.set(
+                        "n",
+                        "]o",
+                        ":AerialNext<CR>",
+                        { buffer = bufnr, silent = true, noremap = true, desc = "Next Outline item" }
+                    )
+                end,
+                layout = { default_direction = "prefer_left" },
+                highlight_on_jump = false,
+                -- Disable aerial on files with this many lines
+                disable_max_lines = 10000,
+                -- Disable aerial on files this size or larger (in bytes)
+                disable_max_size = 2000000, -- Default 2MB
+                -- A list of all symbols to display. Set to false to display all symbols.
+                -- This can be a filetype map (see :help aerial-filetype-map)
+                -- To see all available values, see :help SymbolKind
+                filter_kind = {
+                    "Class",
+                    "Constructor",
+                    "Enum",
+                    "Function",
+                    "Interface",
+                    "Module",
+                    "Method",
+                    "Struct",
+                },
+            })
+        end,
+    },
+    {
+        "LintaoAmons/scratch.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            { "ibhagwan/fzf-lua" }, --optional: if you want to use fzf-lua to pick scratch file. Recommanded, since it will order the files by modification datetime desc. (require rg)
+            -- { "nvim-telescope/telescope.nvim" }, -- optional: if you want to pick scratch file by telescope
+            -- { "stevearc/dressing.nvim" }, -- optional: to have the same UI shown in the GIF
+        },
+        config = function()
+            require("scratch").setup({
+                scratch_file_dir = vim.fn.stdpath("cache") .. "/scratch.nvim", -- where your scratch files will be put
+                window_cmd = "rightbelow vsplit", -- 'vsplit' | 'split' | 'edit' | 'tabedit' | 'rightbelow vsplit'
+                use_telescope = true,
+                -- fzf-lua is recommanded, since it will order the files by modification datetime desc. (require rg)
+                file_picker = "fzflua", -- "fzflua" | "telescope" | nil
+                filetypes = { "py", "lua", "js", "sh", "ts" }, -- you can simply put filetype here
+            })
+        end,
     },
 }
