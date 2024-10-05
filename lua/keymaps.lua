@@ -60,25 +60,34 @@ vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go declaration" })
 vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go reference" })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 vim.keymap.set("n", "<leader>cs", function()
-    vim.lsp.buf.format({ async = false })
+    require("conform").format({ async = false })
     vim.cmd("write")
 end, { desc = "Code format and save" })
-vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Code format" })
-vim.keymap.set("v", "<leader>cf", function()
-    vim.lsp.buf.format({
-        async = true,
-        range = {
-            ["start"] = { vim.fn.line("v"), vim.fn.col("v") - 1 },
-            ["end"] = { vim.fn.line("."), vim.fn.col(".") - 1 },
-        },
-    })
-    vim.api.nvim_input("<esc>")
-end, { desc = "Code format in selected lines", noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>cf", function()
+    require("conform").format({ async = true }, function(err)
+        if not err then
+            local mode = vim.api.nvim_get_mode().mode
+            if vim.startswith(string.lower(mode), "v") then
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+            end
+        end
+    end)
+end, { desc = "Format code" })
+vim.keymap.set({ "n", "v" }, "<leader>cF", function()
+    require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
+    if not err then
+        local mode = vim.api.nvim_get_mode().mode
+        if vim.startswith(string.lower(mode), "v") then
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+        end
+    end
+end, { desc = "Format code in injection" })
 local function toggle_inlay_hints()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end
 vim.keymap.set("n", "<leader>ci", toggle_inlay_hints, { desc = "Toggle inlay hint" })
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
+vim.keymap.set("n", "<leader>co", "<cmd>AerialToggle!<CR>", { desc = "Toggle outline" })
 
 -- Git
 -- vim.keymap.set("n", "<leader>cp", "<Cmd>Gitsigns preview_hunk_inline<CR>", { desc = "Git hunk preview inline" })
