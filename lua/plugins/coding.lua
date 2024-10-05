@@ -2,6 +2,9 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+        },
         config = function()
             local configs = require("nvim-treesitter.configs")
 
@@ -20,11 +23,32 @@ return {
                     "arduino",
                     "markdown",
                     "markdown_inline",
+                    "json",
+                    "xml",
                 },
                 auto_install = true,
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },
+                textobjects = {
+                    select = {
+                        enable = true,
+                        -- Automatically jump forward to textobj, similar to targets.vim
+                        lookahead = true,
+                        keymaps = {
+                            ["af"] = { query = "@function.outer", desc = "Select outer part of a function" },
+                            ["if"] = { query = "@function.inner", desc = "Select inner part of a function" },
+                            ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
+                            ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+                        },
+                    },
+                    swap = {
+                        enable = false,
+                    },
+                    move = {
+                        enable = false,
+                    },
+                },
             })
         end,
     },
