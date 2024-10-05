@@ -51,7 +51,7 @@ vim.keymap.set("n", "<leader>fd", function()
 end, { desc = "Find diagnostics" })
 
 --  File explore
-vim.keymap.set("n", "<leader>fe", "<Cmd>Neotree toggle<CR>", { desc = "File explore" })
+vim.keymap.set("n", "<leader>fe", "<Cmd>Neotree reveal toggle<CR>", { desc = "File explore" })
 vim.keymap.set("n", "<leader>fo", "<Cmd>Oil --float<CR>", { desc = "Oil: Open parent directory" })
 
 -- LSP
