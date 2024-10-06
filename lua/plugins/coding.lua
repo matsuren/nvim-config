@@ -281,6 +281,8 @@ return {
                     "Module",
                     "Method",
                     "Struct",
+                    "Key",
+                    "Array",
                 },
             })
         end,
