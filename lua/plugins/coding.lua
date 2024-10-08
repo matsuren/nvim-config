@@ -108,7 +108,7 @@ return {
             lspconfig.ruff.setup({ capabilities = capabilities })
             lspconfig.pyright.setup({ capabilities = capabilities })
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
-            lspconfig.jsonls.setup({ capabilities = capabilities })
+            -- lspconfig.jsonls.setup({ capabilities = capabilities })
             vim.lsp.inlay_hint.enable(true)
         end,
     },
