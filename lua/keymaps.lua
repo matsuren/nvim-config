@@ -3,6 +3,8 @@
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<C-s>", "<Esc>:w<CR>gv", { noremap = true, silent = true })
+-- Search within visual selection
+vim.keymap.set("v", "<Leader>/", "<Esc>/\\%V", { desc = "Search within the visual selection" })
 
 -- Disable F1 help menu
 vim.api.nvim_set_keymap("n", "<F1>", "<Nop>", { noremap = true, silent = true })
