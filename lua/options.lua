@@ -32,6 +32,8 @@ local options = {
     spell = true,
     -- Always show signcolumn to avoid flicking while debugging
     signcolumn = "yes:1",
+    -- Limit max number of completion items
+    pumheight = 12,
 }
 
 for k, v in pairs(options) do

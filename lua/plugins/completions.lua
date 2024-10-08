@@ -5,6 +5,8 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
+            "ray-x/cmp-treesitter",
+            "lukas-reineke/cmp-rg",
             {
                 "windwp/nvim-autopairs",
                 event = "InsertEnter",
@@ -31,8 +33,8 @@ return {
                     end,
                 },
                 window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
+                    -- completion = cmp.config.window.bordered(),
+                    -- documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -45,9 +47,43 @@ return {
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                 }, {
-                    { name = "buffer", keyword_length = 4 },
+                    { name = "rg", keyword_length = 4, max_item_count = 4 },
+                    { name = "treesitter", keyword_length = 4, max_item_count = 4 },
+                    {
+                        name = "buffer",
+                        keyword_length = 4,
+                        option = {
+                            get_bufnrs = function()
+                                local buf = vim.api.nvim_get_current_buf()
+                                local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+                                if byte_size > 1024 * 1024 then -- 1 Megabyte max
+                                    return {}
+                                end
+                                return { buf }
+                            end,
+                        },
+                    },
                     { name = "path", keyword_length = 3 },
                 }),
+                formatting = {
+                    format = function(entry, vim_item)
+                        -- Source
+                        vim_item.menu = ({
+                            nvim_lsp = "[LSP]",
+                            luasnip = "[LuaSnip]",
+                            treesitter = "[Tree]",
+                            buffer = "[Buffer]",
+                            path = "[Path]",
+                            rg = "[Rg]",
+                        })[entry.source.name]
+                        vim_item.dup = ({
+                            nvim_lsp = 0,
+                            luasnip = 1,
+                        })[entry.source.name] or 0
+                        return vim_item
+                    end,
+                },
+                experimental = { ghost_text = true },
             })
             local cmp_autopairs = require("nvim-autopairs.completion.cmp")
             cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
