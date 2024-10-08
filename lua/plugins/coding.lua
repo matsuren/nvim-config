@@ -4,6 +4,19 @@ return {
         build = ":TSUpdate",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
+            {
+                "nvim-treesitter/nvim-treesitter-context",
+                config = function()
+                    require("treesitter-context").setup({
+                        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+                        max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
+                        min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+                        multiline_threshold = 20, -- Maximum number of lines to show for a single context
+                        trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+                        mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
+                    })
+                end,
+            },
         },
         config = function()
             local configs = require("nvim-treesitter.configs")
@@ -49,19 +62,6 @@ return {
                         enable = false,
                     },
                 },
-            })
-        end,
-    },
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        config = function()
-            require("treesitter-context").setup({
-                enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-                max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
-                min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-                multiline_threshold = 20, -- Maximum number of lines to show for a single context
-                trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-                mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
             })
         end,
     },

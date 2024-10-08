@@ -1,24 +1,26 @@
 return {
-    { "hrsh7th/cmp-nvim-lsp" },
-    { "hrsh7th/cmp-path" },
-    { "hrsh7th/cmp-buffer" },
-    {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        config = function()
-            require("nvim-autopairs").setup({})
-        end,
-    },
-    {
-        "L3MON4D3/LuaSnip",
-        config = function()
-            require("luasnip").setup({})
-            require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-        dependencies = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
-    },
     {
         "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-buffer",
+            {
+                "windwp/nvim-autopairs",
+                event = "InsertEnter",
+                config = function()
+                    require("nvim-autopairs").setup({})
+                end,
+            },
+            {
+                "L3MON4D3/LuaSnip",
+                config = function()
+                    require("luasnip").setup({})
+                    require("luasnip.loaders.from_vscode").lazy_load()
+                end,
+                dependencies = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
+            },
+        },
         config = function()
             local cmp = require("cmp")
             cmp.setup({
