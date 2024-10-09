@@ -121,6 +121,7 @@ return {
         "mfussenegger/nvim-dap",
         config = function()
             local dap = require("dap")
+            require("dap.ext.vscode").load_launchjs(nil, { debugpy = { "python" } })
             vim.cmd([[highlight DapBreakpointTextHl guifg=#DD0000]])
             vim.cmd([[highlight DapStoppedTextHl guifg=#00DD00]])
             vim.fn.sign_define("DapBreakpoint", { text = "B", texthl = "DapBreakpointTextHl" })
@@ -150,6 +151,7 @@ return {
                     })
                 end
             end
+            dap.adapters.debugpy = dap.adapters.python
 
             -- Python launch configuration
             local pythonPathFn = function()
