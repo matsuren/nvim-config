@@ -135,6 +135,12 @@ function _G.set_terminal_keymaps()
         vim.api.nvim_feedkeys('"+y', "v", true)
         require("toggleterm").exec("%paste", ipython.id)
     end, { desc = "Send @paste to ipython terminal" })
+    -- Keymap to run the current file in IPython
+    vim.keymap.set("n", "<leader>tt", function()
+        vim.cmd("write")
+        local file = vim.fn.expand("%") -- Get the current file
+        require("toggleterm").exec("%run " .. file, ipython.id)
+    end, { desc = "Run current file in IPython" })
 end
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
