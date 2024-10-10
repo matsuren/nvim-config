@@ -90,6 +90,10 @@ end
 vim.keymap.set("n", "<leader>ci", toggle_inlay_hints, { desc = "Toggle inlay hint" })
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>co", "<cmd>AerialToggle!<CR>", { desc = "Toggle outline" })
+vim.keymap.set("n", "<leader>cO", function()
+    vim.b.aerial_backends = { "lsp" }
+    require("aerial").refetch_symbols(0)
+end, { desc = "Outline using LSP" })
 
 -- Git
 -- vim.keymap.set("n", "<leader>cp", "<Cmd>Gitsigns preview_hunk_inline<CR>", { desc = "Git hunk preview inline" })
