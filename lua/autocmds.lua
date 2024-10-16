@@ -1,3 +1,36 @@
+-- Handle large file
+vim.api.nvim_create_autocmd({ "BufReadPre" }, {
+    pattern = "*",
+    callback = function()
+        local file = vim.fn.expand("<afile>")
+        local size = vim.fn.getfsize(file)
+        local max_filesize = 2 * 1024 * 1024 -- 2 MB
+
+        if size > max_filesize then
+            -- -- Disable Treesitter
+            require("nvim-treesitter.configs").setup({
+                highlight = {
+                    enable = false,
+                },
+                indent = {
+                    enable = false,
+                },
+                textobjects = {
+                    select = {
+                        enable = false,
+                    },
+                },
+            })
+            -- Disable nvim-cmp
+            require("cmp").setup.buffer({ enabled = false })
+            -- Disable syntax highlighting
+            vim.cmd("syntax off")
+            -- Disable some other features
+            vim.cmd("set eventignore+=BufRead,BufEnter")
+        end
+    end,
+})
+
 vim.api.nvim_create_augroup("custom_buffer", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = custom_buffer,
