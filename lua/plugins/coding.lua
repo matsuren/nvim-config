@@ -106,7 +106,16 @@ return {
                 filetypes = { "c", "cpp" },
             })
             lspconfig.ruff.setup({ capabilities = capabilities })
-            lspconfig.pyright.setup({ capabilities = capabilities })
+            lspconfig.pyright.setup({
+                capabilities = capabilities,
+                settings = {
+                    python = {
+                        analysis = {
+                            autoImportCompletions = false,
+                        },
+                    },
+                },
+            })
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
             -- lspconfig.jsonls.setup({ capabilities = capabilities })
             vim.lsp.inlay_hint.enable(true)
