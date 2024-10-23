@@ -152,6 +152,10 @@ return {
         },
         config = function()
             require("noice").setup({
+                messages = {
+                    -- Use kevinhwang91/nvim-hlslens for search count otherwise max_count is 99
+                    view_search = false,
+                },
                 lsp = {
                     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
                     override = {
@@ -169,6 +173,66 @@ return {
                     lsp_doc_border = true, -- add a border to hover docs and signature help
                 },
             })
+        end,
+    },
+    {
+        "kevinhwang91/nvim-hlslens",
+        dependencies = { "haya14busa/vim-asterisk" },
+        config = function()
+            -- Setup hlslens
+            require("hlslens").setup()
+            -- Key mappings with asterisk and hlslens integration
+            -- Normal mode mappings
+            vim.keymap.set(
+                "n",
+                "*",
+                '<Plug>(asterisk-z*)<Cmd>lua require("hlslens").start()<CR>',
+                { desc = "Search forward with asterisk", silent = true }
+            )
+            vim.keymap.set(
+                "n",
+                "#",
+                '<Plug>(asterisk-z#)<Cmd>lua require("hlslens").start()<CR>',
+                { desc = "Search backward with asterisk", silent = true }
+            )
+            vim.keymap.set(
+                "n",
+                "g*",
+                '<Plug>(asterisk-gz*)<Cmd>lua require("hlslens").start()<CR>',
+                { desc = "Search forward (substring) with asterisk", silent = true }
+            )
+            vim.keymap.set(
+                "n",
+                "g#",
+                '<Plug>(asterisk-gz#)<Cmd>lua require("hlslens").start()<CR>',
+                { desc = "Search backward (substring) with asterisk", silent = true }
+            )
+
+            -- Visual mode mappings
+            vim.keymap.set(
+                "x",
+                "*",
+                '<Plug>(asterisk-z*)<Cmd>lua require("hlslens").start()<CR>',
+                { desc = "Search forward (visual) with asterisk", silent = true }
+            )
+            vim.keymap.set(
+                "x",
+                "#",
+                '<Plug>(asterisk-z#)<Cmd>lua require("hlslens").start()<CR>',
+                { desc = "Search backward (visual) with asterisk", silent = true }
+            )
+            vim.keymap.set(
+                "x",
+                "g*",
+                '<Plug>(asterisk-gz*)<Cmd>lua require("hlslens").start()<CR>',
+                { desc = "Search forward (substring, visual) with asterisk", silent = true }
+            )
+            vim.keymap.set(
+                "x",
+                "g#",
+                '<Plug>(asterisk-gz#)<Cmd>lua require("hlslens").start()<CR>',
+                { desc = "Search backward (substring, visual) with asterisk", silent = true }
+            )
         end,
     },
 }
