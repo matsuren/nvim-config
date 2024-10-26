@@ -1,15 +1,26 @@
 -- Basic
 -- Save with Ctrl + s
-vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<C-s>", "<Esc>:w<CR>gv", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-s>", ":w<CR>", { silent = true })
+vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>", { silent = true })
+vim.keymap.set("v", "<C-s>", "<Esc>:w<CR>gv", { silent = true })
+
 -- Search within visual selection
 vim.keymap.set("v", "<Leader>/", "<Esc>/\\%V", { desc = "Search within the visual selection" })
 
 -- Disable F1 help menu
-vim.api.nvim_set_keymap("n", "<F1>", "<Nop>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "<F1>", "<Nop>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<F1>", "<Nop>", { noremap = true, silent = true })
+vim.keymap.set("n", "<F1>", "<Nop>", { silent = true })
+vim.keymap.set("i", "<F1>", "<Nop>", { silent = true })
+vim.keymap.set("v", "<F1>", "<Nop>", { silent = true })
+
+-- Emacs-style cursor movement in command mode
+vim.keymap.set("c", "<C-a>", "<Home>")
+vim.keymap.set("c", "<C-e>", "<End>")
+-- vim.keymap.set("c", "<C-b>", "<Left>")
+-- vim.keymap.set("c", "<C-f>", "<Right>") -- conflict with open history
+vim.keymap.set("c", "<M-b>", "<S-Left>")
+vim.keymap.set("c", "<M-f>", "<S-Right>")
+vim.keymap.set("c", "<C-p>", "<Up>")
+vim.keymap.set("c", "<C-n>", "<Down>")
 
 -- vim-unimpaired like keymapping
 -- Navigate Quickfix List
