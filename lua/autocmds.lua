@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd({ "BufReadPre" }, {
     callback = function()
         local file = vim.fn.expand("<afile>")
         local size = vim.fn.getfsize(file)
-        local max_filesize = 2 * 1024 * 1024 -- 2 MB
+        local max_filesize = 3 * 1024 * 1024 -- 3 MB
 
         if size > max_filesize then
             -- -- Disable Treesitter
