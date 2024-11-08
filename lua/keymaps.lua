@@ -1,6 +1,8 @@
 -- Basic
 -- Save with Ctrl + s
-vim.keymap.set("n", "<C-s>", ":w<CR>", { silent = true })
+vim.keymap.set("n", "<C-s>", function()
+    vim.cmd("write")
+end, { silent = true })
 vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>", { silent = true })
 vim.keymap.set("v", "<C-s>", "<Esc>:w<CR>gv", { silent = true })
 
