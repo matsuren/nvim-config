@@ -22,6 +22,11 @@ return {
                             path = 1,
                             color = { fg = "#cccccc" },
                         },
+                        {
+                            function()
+                                return vim.fn.getcwd()
+                            end,
+                        },
                     },
                     lualine_x = {
                         {
