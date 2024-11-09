@@ -2,8 +2,16 @@ return {
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.8",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-live-grep-args.nvim",
+            "nvim-telescope/telescope-file-browser.nvim",
+            "nvim-telescope/telescope-frecency.nvim",
+            "nvim-telescope/telescope-ui-select.nvim",
+        },
         config = function()
+            local fb_actions = require("telescope._extensions.file_browser.actions")
+            local lga_actions = require("telescope-live-grep-args.actions")
             require("telescope").setup({
                 extensions = {
                     fzf = {
@@ -12,6 +20,27 @@ return {
                         override_file_sorter = true, -- override the file sorter
                         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
                         -- the default case_mode is "smart_case"
+                    },
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown({
+                            -- even more opts
+                        }),
+                    },
+                    live_grep_args = {
+                        auto_quoting = false, -- enable/disable auto-quoting
+                        -- define mappings, e.g.
+                        mappings = { -- extend mappings
+                            i = {
+                                ["<C-k>"] = lga_actions.quote_prompt(),
+                                ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                                ["<C-f>"] = require("telescope.actions").to_fuzzy_refine,
+                            },
+                        },
+                    },
+                    file_browser = {
+                        depth = 3,
+                        auto_depth = true,
+                        dir_icon = "D",
                     },
                 },
                 pickers = {
@@ -42,25 +71,15 @@ return {
                     },
                 },
             })
+            require("telescope").load_extension("fzf")
+            require("telescope").load_extension("live_grep_args")
+            require("telescope").load_extension("ui-select")
+            require("telescope").load_extension("frecency")
+            require("telescope").load_extension("file_browser")
         end,
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
-    },
-    {
-        "nvim-telescope/telescope-ui-select.nvim",
-        config = function()
-            require("telescope").setup({
-                extensions = {
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown({
-                            -- even more opts
-                        }),
-                    },
-                },
-            })
-            require("telescope").load_extension("ui-select")
-        end,
     },
 }
