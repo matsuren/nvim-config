@@ -5,12 +5,10 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-live-grep-args.nvim",
-            "nvim-telescope/telescope-file-browser.nvim",
             "nvim-telescope/telescope-frecency.nvim",
             "nvim-telescope/telescope-ui-select.nvim",
         },
         config = function()
-            local fb_actions = require("telescope._extensions.file_browser.actions")
             local lga_actions = require("telescope-live-grep-args.actions")
             require("telescope").setup({
                 extensions = {
@@ -36,11 +34,6 @@ return {
                                 ["<C-f>"] = require("telescope.actions").to_fuzzy_refine,
                             },
                         },
-                    },
-                    file_browser = {
-                        depth = 3,
-                        auto_depth = true,
-                        dir_icon = "D",
                     },
                 },
                 pickers = {
@@ -75,7 +68,6 @@ return {
             require("telescope").load_extension("live_grep_args")
             require("telescope").load_extension("ui-select")
             require("telescope").load_extension("frecency")
-            require("telescope").load_extension("file_browser")
         end,
     },
     {
