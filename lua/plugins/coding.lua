@@ -193,6 +193,21 @@ return {
                     program = "${file}",
                     pythonPath = pythonPathFn,
                 },
+                {
+                    type = "python",
+                    request = "launch",
+                    name = "Launch file with arguments",
+                    justMyCode = false,
+                    console = "integratedTerminal",
+                    program = "${file}",
+                    pythonPath = pythonPathFn,
+                    args = function()
+                        -- Prompt the user for arguments
+                        local user_input = vim.fn.input("Enter arguments: ")
+                        -- Split input into a table of arguments
+                        return vim.split(user_input, " ", { trimempty = true })
+                    end,
+                },
             }
         end,
     },
