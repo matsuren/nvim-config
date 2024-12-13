@@ -84,7 +84,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "clangd", "lua_ls", "rust_analyzer", "ruff", "pyright", "jsonls" },
+                ensure_installed = { "clangd", "lua_ls", "rust_analyzer", "ruff", "pyright", "jsonls", "typos_lsp" },
             })
         end,
     },
@@ -116,6 +116,7 @@ return {
                     },
                 },
             })
+            lspconfig.typos_lsp.setup({})
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
             -- lspconfig.jsonls.setup({ capabilities = capabilities })
             vim.lsp.inlay_hint.enable(true)
