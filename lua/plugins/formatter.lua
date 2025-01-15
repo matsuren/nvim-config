@@ -30,6 +30,10 @@ return {
                 yaml = { "yq" },
                 markdown = { "prettier" },
                 graphql = { "prettier" },
+                javascript = { "prettier" },
+                javascriptreact = { "prettier" },
+                typescript = { "prettier" },
+                typescriptreact = { "prettier" },
             },
             default_format_opts = {
                 lsp_format = "fallback",
