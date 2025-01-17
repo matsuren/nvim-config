@@ -127,12 +127,15 @@ return {
         end,
     },
     {
-        "NvChad/nvim-colorizer.lua",
+        "catgoose/nvim-colorizer.lua",
+        event = "BufReadPre",
         config = function()
             require("colorizer").setup({
                 user_default_options = {
                     RGB = false, -- Disable #123
                     names = false, -- Disable Red, Blue, etc.
+                    tailwind = "normal",
+                    always_update = true, -- Good for tailwind cmp_menu
                 },
             })
         end,
