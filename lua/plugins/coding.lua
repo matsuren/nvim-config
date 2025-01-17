@@ -85,7 +85,16 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "clangd", "lua_ls", "rust_analyzer", "ruff", "pyright", "jsonls", "typos_lsp" },
+                ensure_installed = {
+                    "clangd",
+                    "lua_ls",
+                    "rust_analyzer",
+                    "ruff",
+                    "pyright",
+                    "jsonls",
+                    "typos_lsp",
+                    "tailwindcss",
+                },
             })
         end,
     },
@@ -140,6 +149,17 @@ return {
                 },
             })
         end,
+    },
+    {
+        "luckasRanarison/tailwind-tools.nvim",
+        name = "tailwind-tools",
+        build = ":UpdateRemotePlugins",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-telescope/telescope.nvim", -- optional
+            "neovim/nvim-lspconfig", -- optional
+        },
+        opts = {}, -- your configuration
     },
     {
         "windwp/nvim-ts-autotag",
