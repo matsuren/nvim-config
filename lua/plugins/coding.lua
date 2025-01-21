@@ -39,6 +39,7 @@ return {
                     "markdown_inline",
                     "json",
                     "xml",
+                    "comment",
                 },
                 auto_install = true,
                 sync_install = false,
