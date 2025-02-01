@@ -26,6 +26,14 @@ vim.keymap.set("c", "<M-f>", "<S-Right>")
 vim.keymap.set("c", "<C-p>", "<Up>")
 vim.keymap.set("c", "<C-n>", "<Down>")
 
+-- Change Ctrl-arrow behavior
+vim.keymap.set("n", "<C-Right>", "e", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-Left>", "b", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-Right>", "<C-o>e<C-o>a", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-Left>", "<C-o>b", { noremap = true, silent = true })
+vim.keymap.set("v", "<C-Right>", "e", { noremap = true, silent = true })
+vim.keymap.set("v", "<C-Left>", "b", { noremap = true, silent = true })
+
 -- vim-unimpaired like keymapping
 -- Navigate Quickfix List
 vim.keymap.set("n", "[q", ":cprevious<CR>", { silent = true, noremap = true, desc = "Previous quickfix item" })
