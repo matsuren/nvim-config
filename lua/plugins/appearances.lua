@@ -12,20 +12,38 @@ return {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
+            -- https://github.com/nvim-lualine/lualine.nvim/pull/1296
+            function shorten_str(str, len)
+                if string.len(str) > len then
+                    return string.sub(str, 1, len / 2) .. "…" .. string.sub(str, str:len() - len / 2 + 1, str:len())
+                else
+                    return str
+                end
+            end
+
             require("lualine").setup({
+                options = {
+                    component_separators = "|",
+                    section_separators = "",
+                },
                 sections = {
                     lualine_a = { "mode" },
-                    lualine_b = { "branch", "diff", "diagnostics" },
+                    lualine_b = {
+                        {
+                            "branch",
+                            fmt = function(str)
+                                return shorten_str(str, 20)
+                            end,
+                            icons_enabled = false,
+                        },
+                        "diff",
+                        -- "diagnostics",
+                    },
                     lualine_c = {
                         {
                             "filename",
                             path = 1,
                             color = { fg = "#cccccc" },
-                        },
-                        {
-                            function()
-                                return vim.fn.getcwd()
-                            end,
                         },
                     },
                     lualine_x = {
@@ -35,11 +53,10 @@ return {
                             color = { fg = "#ff9e64" },
                         },
                         "encoding",
-                        "fileformat",
-                        "filetype",
+                        { "filetype", icons_enabled = false },
                     },
                     lualine_y = { "progress" },
-                    lualine_z = { "location" },
+                    lualine_z = { { "location", padding = { left = 0, right = 1 } } },
                 },
                 inactive_sections = {
                     lualine_a = {},
@@ -57,11 +74,8 @@ return {
                             color = { fg = "#aaaaaa" },
                         },
                         {
-                            "fileformat",
-                            color = { fg = "#aaaaaa" },
-                        },
-                        {
                             "filetype",
+                            icons_enabled = false,
                             color = { fg = "#aaaaaa" },
                         },
                         {
@@ -77,7 +91,11 @@ return {
                     lualine_b = {},
                     lualine_c = {},
                     lualine_x = {},
-                    lualine_y = {},
+                    lualine_y = {
+                        function()
+                            return vim.fn.getcwd()
+                        end,
+                    },
                     lualine_z = { "tabs" },
                 },
                 winbar = {
