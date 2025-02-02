@@ -76,6 +76,8 @@ vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find s
 vim.keymap.set("n", "<leader>fd", function()
     builtin.diagnostics({ bufnr = 0 })
 end, { desc = "Find diagnostics" })
+vim.keymap.set("n", "<leader>fn", ":Telescope notify<CR>", { desc = "Telescope notify" })
+vim.keymap.set("n", "<leader>fa", ":Telescope resume<CR>", { desc = "Telescope resume (Again)" })
 
 --  File explore
 vim.keymap.set("n", "<leader>fe", "<Cmd>Neotree reveal toggle<CR>", { desc = "File explore" })
@@ -86,10 +88,6 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go definition" })
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go declaration" })
 vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go reference" })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-vim.keymap.set("n", "<leader>cs", function()
-    require("conform").format({ async = false })
-    vim.cmd("write")
-end, { desc = "Code format and save" })
 vim.keymap.set({ "n", "v" }, "<leader>cf", function()
     require("conform").format({ async = true }, function(err)
         if not err then
