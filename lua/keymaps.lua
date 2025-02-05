@@ -13,8 +13,8 @@ vim.keymap.set("v", "<Leader>/", "<Esc>/\\%V", { desc = "Search within the visua
 vim.keymap.set("n", "<F1>", "<Nop>", { silent = true })
 vim.keymap.set("i", "<F1>", "<Nop>", { silent = true })
 vim.keymap.set("v", "<F1>", "<Nop>", { silent = true })
--- Disable close action
-vim.keymap.set("n", "<C-w>q", "<Nop>", { noremap = true, silent = true })
+-- Disable quit action
+vim.keymap.set("n", "<C-w>q", "<C-w>c", { noremap = true })
 
 -- Emacs-style cursor movement in command mode
 vim.keymap.set("c", "<C-a>", "<Home>")
