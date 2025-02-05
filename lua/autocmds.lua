@@ -1,3 +1,17 @@
+-- Make setting
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "python",
+    callback = function()
+        vim.bo.makeprg = "mypy --show-column-numbers --no-error-summary %"
+    end,
+})
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+    pattern = "make",
+    callback = function()
+        vim.cmd("cwindow")
+    end,
+})
+
 -- Handle large file
 vim.api.nvim_create_autocmd({ "BufReadPre" }, {
     pattern = "*",
