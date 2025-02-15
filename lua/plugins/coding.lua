@@ -91,7 +91,7 @@ return {
                     "lua_ls",
                     "rust_analyzer",
                     "ruff",
-                    "pyright",
+                    "basedpyright",
                     "jsonls",
                     "typos_lsp",
                     "tailwindcss",
@@ -195,12 +195,26 @@ return {
                 filetypes = { "c", "cpp" },
             })
             lspconfig.ruff.setup({ capabilities = capabilities })
-            lspconfig.pyright.setup({
+            lspconfig.basedpyright.setup({
                 capabilities = capabilities,
                 settings = {
-                    python = {
+                    basedpyright = {
                         analysis = {
+                            typeCheckingMode = "basic",
                             autoImportCompletions = false,
+                            diagnosticSeverityOverrides = {
+                                -- reportUnusedExpression = "none",
+                                -- reportUnusedClass = "none",
+                                -- reportUnusedFunction = "none",
+                                reportUnusedImport = "none",
+                                reportUnusedVariable = "none",
+                            },
+                            inlayHints = {
+                                variableTypes = true,
+                                functionReturnTypes = true,
+                                pytestParameters = true,
+                                callArgumentNames = true,
+                            },
                         },
                     },
                 },
