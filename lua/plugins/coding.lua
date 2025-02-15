@@ -513,4 +513,7 @@ return {
             },
         },
     },
+    {
+        "Davidyz/inlayhint-filler.nvim",
+    },
 }

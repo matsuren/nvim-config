@@ -111,6 +111,14 @@ local function toggle_inlay_hints()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end
 vim.keymap.set("n", "<leader>ci", toggle_inlay_hints, { desc = "Toggle inlay hint" })
+local function insert_inlay_hints()
+    require("inlayhint-filler").fill()
+    local mode = vim.api.nvim_get_mode().mode
+    if vim.startswith(string.lower(mode), "v") then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+    end
+end
+vim.keymap.set("v", "<leader>ci", insert_inlay_hints, { desc = "Insert inlay hint into buffer" })
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>co", "<cmd>AerialToggle!<CR>", { desc = "Toggle outline" })
 vim.keymap.set("n", "<leader>cO", function()
