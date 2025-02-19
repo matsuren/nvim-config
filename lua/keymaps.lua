@@ -16,20 +16,27 @@ vim.keymap.set("v", "<F1>", "<Nop>", { silent = true })
 -- Disable quit action
 vim.keymap.set("n", "<C-w>q", "<C-w>c", { noremap = true })
 
--- Emacs-style cursor movement in command mode
-vim.keymap.set("c", "<C-a>", "<Home>")
-vim.keymap.set("c", "<C-e>", "<End>")
--- vim.keymap.set("c", "<C-b>", "<Left>")
--- vim.keymap.set("c", "<C-f>", "<Right>") -- conflict with open history
-vim.keymap.set("c", "<M-b>", "<S-Left>")
-vim.keymap.set("c", "<M-f>", "<S-Right>")
-vim.keymap.set("c", "<C-p>", "<Up>")
-vim.keymap.set("c", "<C-n>", "<Down>")
+-- Readline/Emacs-style cursor movement in command mode
+vim.keymap.set("c", "<C-a>", "<Home>", { noremap = true })
+vim.keymap.set("c", "<C-e>", "<End>", { noremap = true })
+-- vim.keymap.set("c", "<C-b>", "<Left>", { noremap = true })
+-- vim.keymap.set("c", "<C-f>", "<Right>", { noremap = true }) -- conflict with open history
+vim.keymap.set("c", "<M-b>", "<S-Left>", { noremap = true })
+vim.keymap.set("c", "<M-f>", "<S-Right>", { noremap = true })
+vim.keymap.set("c", "<C-p>", "<Up>", { noremap = true })
+vim.keymap.set("c", "<C-n>", "<Down>", { noremap = true })
+-- Readline/Emacs-style cursor movement in insert mode
+vim.keymap.set("i", "<C-a>", "<C-o>^", { noremap = true })
+vim.keymap.set("i", "<C-e>", "<C-o>$", { noremap = true })
+vim.keymap.set("i", "<C-f>", "<Right>", { noremap = true })
+vim.keymap.set("i", "<C-b>", "<Left>", { noremap = true })
+vim.keymap.set("i", "<M-f>", "<C-o>w", { noremap = true })
+vim.keymap.set("i", "<M-b>", "<C-o>b", { noremap = true })
 
 -- Change Ctrl-arrow behavior
 vim.keymap.set("n", "<C-Right>", "e", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-Left>", "b", { noremap = true, silent = true })
-vim.keymap.set("i", "<C-Right>", "<C-o>e<C-o>a", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-Right>", "<C-o>w", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-Left>", "<C-o>b", { noremap = true, silent = true })
 vim.keymap.set("v", "<C-Right>", "e", { noremap = true, silent = true })
 vim.keymap.set("v", "<C-Left>", "b", { noremap = true, silent = true })
