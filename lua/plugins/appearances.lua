@@ -188,6 +188,28 @@ return {
         },
         config = function()
             require("noice").setup({
+                views = {
+                    hover = {
+                        view = "popup",
+                        relative = "cursor",
+                        anchor = "auto",
+                        size = {
+                            width = "auto",
+                            height = "auto",
+                            max_height = 20,
+                            max_width = 80,
+                        },
+                        border = {
+                            style = "rounded",
+                            padding = { 0, 1 },
+                        },
+                        position = { row = 0, col = 10 },
+                        win_options = {
+                            wrap = true,
+                            linebreak = true,
+                        },
+                    },
+                },
                 messages = {
                     -- Use kevinhwang91/nvim-hlslens for search count otherwise max_count is 99
                     view_search = false,
@@ -198,6 +220,12 @@ return {
                         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
                         ["vim.lsp.util.stylize_markdown"] = true,
                         ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+                    },
+                    signature = {
+                        relative = "cursor",
+                        auto_open = {
+                            throttle = 500,
+                        },
                     },
                 },
                 -- you can enable a preset for easier configuration
