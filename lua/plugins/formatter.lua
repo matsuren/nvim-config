@@ -34,6 +34,7 @@ return {
                 javascriptreact = { "prettier" },
                 typescript = { "prettier" },
                 typescriptreact = { "prettier" },
+                go = { "gofumpt" },
             },
             default_format_opts = {
                 lsp_format = "fallback",
