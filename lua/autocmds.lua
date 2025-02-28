@@ -12,6 +12,40 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
     end,
 })
 
+-- Keymap for filetype
+-- Kulala
+local kulala = require("kulala")
+-- Set keymaps only for HTTP and REST filetypes
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "http", "rest" },
+    callback = function()
+        vim.keymap.set("n", "<leader>rb", kulala.scratchpad, { desc = "Open scratchpad", buffer = true })
+        vim.keymap.set("n", "<leader>ro", kulala.open, { desc = "Open kulala", buffer = true })
+        vim.keymap.set("n", "<leader>rt", kulala.toggle_view, { desc = "Toggle headers/body", buffer = true })
+        vim.keymap.set("n", "<leader>rS", kulala.show_stats, { desc = "Show stats", buffer = true })
+        vim.keymap.set("n", "<leader>rq", kulala.close, { desc = "Close window", buffer = true })
+        vim.keymap.set("n", "<leader>rc", kulala.copy, { desc = "Copy as cURL", buffer = true })
+        vim.keymap.set("n", "<leader>rC", kulala.from_curl, { desc = "Paste from curl", buffer = true })
+        vim.keymap.set({ "n", "v" }, "<leader>rs", kulala.run, { desc = "Send request", buffer = true })
+        vim.keymap.set({ "n", "v" }, "<CR>", kulala.run, { desc = "Send request <cr>", buffer = true })
+        vim.keymap.set({ "n", "v" }, "<leader>ra", kulala.run_all, { desc = "Send all requests", buffer = true })
+        vim.keymap.set("n", "<leader>ri", kulala.inspect, { desc = "Inspect current request", buffer = true })
+        vim.keymap.set("n", "<leader>rr", kulala.replay, { desc = "Replay the last request", buffer = true })
+        vim.keymap.set("n", "<leader>rf", kulala.search, { desc = "Find request", buffer = true })
+        vim.keymap.set("n", "<leader>rn", kulala.jump_next, { desc = "Jump to next request", buffer = true })
+        vim.keymap.set("n", "<leader>rp", kulala.jump_prev, { desc = "Jump to previous request", buffer = true })
+        vim.keymap.set("n", "<leader>re", kulala.set_selected_env, { desc = "Select environment", buffer = true })
+        vim.keymap.set(
+            "n",
+            "<leader>rg",
+            kulala.download_graphql_schema,
+            { desc = "Download GraphQL schema", buffer = true }
+        )
+        vim.keymap.set("n", "<leader>rx", kulala.scripts_clear_global, { desc = "Clear globals", buffer = true })
+        vim.keymap.set("n", "<leader>rX", kulala.clear_cached_files, { desc = "Clear cached files", buffer = true })
+    end,
+})
+
 -- Handle large file
 vim.api.nvim_create_autocmd({ "BufReadPre" }, {
     pattern = "*",
