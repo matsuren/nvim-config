@@ -83,6 +83,9 @@ return {
                         return vim_item
                     end,
                 },
+                performance = {
+                    max_view_entries = 30,
+                },
                 experimental = { ghost_text = true },
             })
         end,
