@@ -72,7 +72,7 @@ vim.keymap.set("n", "<leader>fg", ":Telescope live_grep_args<CR>", { desc = "Liv
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
 vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recently open files" })
 vim.keymap.set("n", "<leader>fj", builtin.jumplist, { desc = "Find jumplist" })
-vim.keymap.set("n", "<leader>fc", builtin.git_status, { desc = "Find changes" })
+vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy find in current buffer" })
 vim.keymap.set("n", "<leader>fC", builtin.command_history, { desc = "Find command history" })
 vim.keymap.set("n", "<leader>fm", builtin.marks, { desc = "Find marks" })
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find help tags" })
@@ -156,6 +156,7 @@ vim.keymap.set("n", "<leader>cg", "<Cmd>Neogit<CR>", { desc = "Git status with n
 vim.keymap.set("n", "<leader>cl", "<Cmd>0Gclog<CR>", { desc = "Git log for current file" })
 vim.keymap.set("n", "<leader>ch", "<Cmd>DiffviewFileHistory %<CR>", { desc = "Git log for current file" })
 vim.keymap.set("n", "<leader>cH", "<Cmd>DiffviewFileHistory<CR>", { desc = "Git log for current branch" })
+vim.keymap.set("n", "<leader>cc", require("telescope.builtin").git_status, { desc = "Find git changes" })
 
 -- Terminal
 vim.keymap.set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>", { desc = "Open terminal vertically" })
