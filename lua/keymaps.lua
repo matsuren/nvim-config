@@ -154,6 +154,22 @@ vim.keymap.set("n", "<leader>cb", "<Cmd>Gitsigns blame_line full=true<CR>", { de
 vim.keymap.set("n", "<leader>cB", "<Cmd>Gitsigns blame<CR>", { desc = "Git blame" })
 vim.keymap.set("n", "<leader>cg", "<Cmd>Neogit<CR>", { desc = "Git status with neogit" })
 vim.keymap.set("n", "<leader>cl", "<Cmd>0Gclog<CR>", { desc = "Git log for current file" })
+vim.keymap.set("n", "<leader>cL", function()
+    local current_config = vim.diagnostic.config()
+    local severity_levels = { "ERROR", "WARN", "INFO", "HINT" }
+    local current_level = 4
+    if current_config.virtual_text and current_config.virtual_text.severity then
+        current_level = current_config.virtual_text.severity.min
+    end
+    local next_level = (current_level % 4) + 1
+    vim.diagnostic.config({
+        virtual_text = {
+            source = current_config.virtual_text.source,
+            severity = { min = next_level },
+        },
+    })
+    vim.notify("Diagnostic level for virtual text: " .. severity_levels[next_level])
+end, { desc = "Cycle diagnostic severity levels for virtual text" })
 vim.keymap.set("n", "<leader>ch", "<Cmd>DiffviewFileHistory %<CR>", { desc = "Git log for current file" })
 vim.keymap.set("n", "<leader>cH", "<Cmd>DiffviewFileHistory<CR>", { desc = "Git log for current branch" })
 vim.keymap.set("n", "<leader>cc", require("telescope.builtin").git_status, { desc = "Find git changes" })

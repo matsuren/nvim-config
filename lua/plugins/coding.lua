@@ -224,7 +224,21 @@ return {
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
             -- lspconfig.jsonls.setup({ capabilities = capabilities })
             vim.lsp.inlay_hint.enable(true)
-            vim.diagnostic.config({ virtual_text = { source = true }, underline = true, severity_sort = false })
+            vim.diagnostic.config({
+                underline = true,
+                underline_severity = nil,
+                virtual_text = {
+                    source = "always",
+                    severity = { min = vim.diagnostic.severity.INFO },
+                },
+                signs = true,
+                float = {
+                    border = "rounded",
+                    source = "always",
+                },
+                update_in_insert = false,
+                severity_sort = true,
+            })
         end,
     },
     {
