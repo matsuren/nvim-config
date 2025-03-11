@@ -28,8 +28,8 @@ local options = {
     wrapscan = true,
     -- Clipboard
     clipboard = "unnamedplus",
-    -- Spell check
-    spell = true,
+    -- Spell check (use typos instead)
+    spell = false,
     -- Always show signcolumn to avoid flicking while debugging
     signcolumn = "yes:1",
     -- Limit max number of completion items
