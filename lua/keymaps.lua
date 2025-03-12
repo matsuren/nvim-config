@@ -156,19 +156,23 @@ vim.keymap.set("n", "<leader>cg", "<Cmd>Neogit<CR>", { desc = "Git status with n
 vim.keymap.set("n", "<leader>cl", "<Cmd>0Gclog<CR>", { desc = "Git log for current file" })
 vim.keymap.set("n", "<leader>cL", function()
     local current_config = vim.diagnostic.config()
-    local severity_levels = { "ERROR", "WARN", "INFO", "HINT" }
-    local current_level = 4
-    if current_config.virtual_text and current_config.virtual_text.severity then
-        current_level = current_config.virtual_text.severity.min
-    end
-    local next_level = (current_level % 4) + 1
+    local severity_levels = { "N/A", "ERROR", "WARN", "INFO", "HINT" }
+    local current_level = (
+        current_config.virtual_text
+        and current_config.virtual_text.severity
+        and current_config.virtual_text.severity.min
+    ) or 2 -- default: WARN
+    local next_level = (current_level - 1) % 5
     vim.diagnostic.config({
+        underline = {
+            severity = { min = next_level },
+        },
         virtual_text = {
             source = current_config.virtual_text.source,
             severity = { min = next_level },
         },
     })
-    vim.notify("Diagnostic level for virtual text: " .. severity_levels[next_level])
+    vim.notify("Diagnostic level for virtual text and underline: " .. severity_levels[next_level + 1])
 end, { desc = "Cycle diagnostic severity levels for virtual text" })
 vim.keymap.set("n", "<leader>ch", "<Cmd>DiffviewFileHistory %<CR>", { desc = "Git log for current file" })
 vim.keymap.set("n", "<leader>cH", "<Cmd>DiffviewFileHistory<CR>", { desc = "Git log for current branch" })
