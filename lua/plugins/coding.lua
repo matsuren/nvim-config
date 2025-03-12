@@ -200,12 +200,11 @@ return {
                 settings = {
                     basedpyright = {
                         analysis = {
-                            typeCheckingMode = "basic",
+                            typeCheckingMode = "off", -- "off", "basic", "standard", "strict", "recommended", "all"
                             autoImportCompletions = false,
                             diagnosticSeverityOverrides = {
-                                -- reportUnusedExpression = "none",
-                                -- reportUnusedClass = "none",
-                                -- reportUnusedFunction = "none",
+                                reportTypeCommentUsage = "none",
+                                -- Use ruff instead of the following
                                 reportUnusedImport = "none",
                                 reportUnusedVariable = "none",
                             },
