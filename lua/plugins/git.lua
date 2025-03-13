@@ -8,7 +8,8 @@ return {
                     delay = 500,
                 },
                 max_file_length = 100000, -- Disable if file is longer than this (in lines)
-                sign_priority = 100,
+                sign_priority = 6,
+                numhl = true,
                 on_attach = function(bufnr)
                     local gitsigns = require("gitsigns")
 

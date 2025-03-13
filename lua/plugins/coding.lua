@@ -223,7 +223,7 @@ return {
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
             -- lspconfig.jsonls.setup({ capabilities = capabilities })
             vim.lsp.inlay_hint.enable(true)
-            local base_severity = vim.diagnostic.severity.WARN
+            local base_severity = vim.diagnostic.severity.HINT
             vim.diagnostic.config({
                 -- Check keymap for cycling diagnostic severity levels
                 underline = {
@@ -233,7 +233,7 @@ return {
                     source = "always",
                     severity = { min = base_severity },
                 },
-                signs = true,
+                signs = { priority = 10 },
                 float = {
                     border = "rounded",
                     source = "always",

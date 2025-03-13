@@ -161,7 +161,7 @@ vim.keymap.set("n", "<leader>cL", function()
         current_config.virtual_text
         and current_config.virtual_text.severity
         and current_config.virtual_text.severity.min
-    ) or 2 -- default: WARN
+    ) or 4 -- default: HINT (defined in coding.lua)
     local next_level = (current_level - 1) % 5
     vim.diagnostic.config({
         underline = {

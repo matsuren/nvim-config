@@ -31,7 +31,7 @@ local options = {
     -- Spell check (use typos instead)
     spell = false,
     -- Always show signcolumn to avoid flicking while debugging
-    signcolumn = "yes:2",
+    signcolumn = "yes:1",
     -- Limit max number of completion items
     pumheight = 12,
 }
