@@ -194,12 +194,21 @@ return {
                 },
                 filetypes = { "c", "cpp" },
             })
-            lspconfig.ruff.setup({ capabilities = capabilities })
+            lspconfig.ruff.setup({
+                capabilities = capabilities,
+                on_attach = function(client, bufnr)
+                    -- Disable hover in favor of Pyright
+                    client.server_capabilities.hoverProvider = false
+                end,
+            })
             lspconfig.basedpyright.setup({
                 capabilities = capabilities,
                 settings = {
                     basedpyright = {
                         analysis = {
+                            -- Ignore all files for analysis to exclusively use Ruff for linting
+                            ignore = { "*" },
+                            --
                             typeCheckingMode = "off", -- "off", "basic", "standard", "strict", "recommended", "all"
                             autoImportCompletions = false,
                             diagnosticSeverityOverrides = {
