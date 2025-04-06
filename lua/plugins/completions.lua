@@ -64,6 +64,7 @@ return {
                         },
                     },
                     { name = "path", keyword_length = 3 },
+                    { name = "vim-dadbod-completion" },
                 }),
                 formatting = {
                     format = function(entry, vim_item)
@@ -75,6 +76,7 @@ return {
                             buffer = "[Buffer]",
                             path = "[Path]",
                             rg = "[Rg]",
+                            ["vim-dadbod-completion"] = "[DB]",
                         })[entry.source.name]
                         vim_item.dup = ({
                             nvim_lsp = 0,
