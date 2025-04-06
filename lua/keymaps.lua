@@ -184,6 +184,7 @@ end, { desc = "Cycle diagnostic severity levels for virtual text" })
 vim.keymap.set("n", "<leader>ch", "<Cmd>DiffviewFileHistory %<CR>", { desc = "Git log for current file" })
 vim.keymap.set("n", "<leader>cH", "<Cmd>DiffviewFileHistory<CR>", { desc = "Git log for current branch" })
 vim.keymap.set("n", "<leader>cc", require("telescope.builtin").git_status, { desc = "Find git changes" })
+vim.keymap.set("n", "<leader>cb", "<Cmd>G blame<CR>", { desc = "Git blame" })
 
 -- Terminal
 vim.keymap.set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>", { desc = "Open terminal vertically" })
