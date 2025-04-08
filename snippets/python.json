@@ -1,0 +1,18 @@
+{
+  "IPython pdb breakpoint": {
+    "prefix": "ipyb",
+    "body": "__import__(\"IPython.core.debugger\", fromlist=[\"Pdb\"]).Pdb().set_trace()$0"
+  },
+  "IPython embedded shell": {
+    "prefix": "ipye",
+    "body": "__import__(\"IPython\").embed(colors=\"neutral\")$0"
+  },
+  "IPython ultratb traceback exepthook": {
+    "prefix": "ipyt",
+    "body": [
+      "import sys",
+      "from IPython.core import ultratb",
+      "sys.excepthook = ultratb.FormattedTB(mode='Verbose', color_scheme='Linux', call_pdb=1)$0"
+    ]
+  }
+}
