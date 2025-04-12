@@ -87,15 +87,15 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    "clangd",
-                    "lua_ls",
-                    "rust_analyzer",
-                    "ruff",
                     "basedpyright",
-                    "jsonls",
-                    "typos_lsp",
-                    "tailwindcss",
+                    "clangd",
                     "gopls",
+                    "jsonls",
+                    "lua_ls",
+                    "ruff",
+                    "rust_analyzer",
+                    "tailwindcss",
+                    "typos_lsp",
                 },
             })
         end,
