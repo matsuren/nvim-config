@@ -25,15 +25,16 @@ return {
                         return { "isort", "black" }
                     end
                 end,
-                json = { "jq" },
                 xml = { "xmlformat" },
                 yaml = { "yq" },
                 markdown = { "prettier" },
-                graphql = { "prettier" },
-                javascript = { "prettier" },
-                javascriptreact = { "prettier" },
-                typescript = { "prettier" },
-                typescriptreact = { "prettier" },
+                json = { "biome" },
+                css = { "biome" },
+                graphql = { "biome" },
+                javascript = { "biome" },
+                javascriptreact = { "biome" },
+                typescript = { "biome" },
+                typescriptreact = { "biome" },
                 go = { "gofumpt" },
             },
             default_format_opts = {

@@ -88,6 +88,7 @@ return {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "basedpyright",
+                    "biome",
                     "clangd",
                     "gopls",
                     "jsonls",
@@ -227,6 +228,7 @@ return {
                     },
                 },
             })
+            lspconfig.biome.setup({ capabilities = capabilities })
             lspconfig.typos_lsp.setup({})
             lspconfig.gopls.setup({ capabilities = capabilities })
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
