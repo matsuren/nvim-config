@@ -543,4 +543,16 @@ return {
     {
         "Davidyz/inlayhint-filler.nvim",
     },
+    {
+        "andythigpen/nvim-coverage",
+        version = "*",
+        config = function()
+            require("coverage").setup({
+                auto_reload = true,
+                load_coverage_cb = function(ftype)
+                    vim.notify("Loaded " .. ftype .. " coverage")
+                end,
+            })
+        end,
+    },
 }
