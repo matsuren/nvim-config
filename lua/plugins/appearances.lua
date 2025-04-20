@@ -299,4 +299,8 @@ return {
             )
         end,
     },
+    {
+        -- Hightligt and StripWhitespace
+        "ntpeters/vim-better-whitespace",
+    },
 }
