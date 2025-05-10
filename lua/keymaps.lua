@@ -279,3 +279,6 @@ end
 dap.listeners.before.event_exited.dapui_config = function()
     dapui.close()
 end
+
+-- HakonHarnes/img-clip.nvim
+vim.keymap.set("n", "<Leader>p", "<cmd>PasteImage<cr>", { desc = "Paste image from system clipboard" })
