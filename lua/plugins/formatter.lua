@@ -18,13 +18,7 @@ return {
             -- Define your formatters
             formatters_by_ft = {
                 lua = { "stylua" },
-                python = function(bufnr)
-                    if require("conform").get_formatter_info("ruff_format", bufnr).available then
-                        return { "ruff_format" }
-                    else
-                        return { "isort", "black" }
-                    end
-                end,
+                python = { "ruff_format" },
                 xml = { "xmlformat" },
                 yaml = { "yq" },
                 markdown = { "prettier" },
@@ -42,9 +36,6 @@ return {
             },
             formatters = {
                 injected = { options = { ignore_errors = true } },
-                black = {
-                    prepend_args = { "--line-length", "88" },
-                },
                 ruff_format = {
                     append_args = { "--line-length", "88" },
                 },
