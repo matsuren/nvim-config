@@ -36,9 +36,6 @@ return {
             },
             formatters = {
                 injected = { options = { ignore_errors = true } },
-                ruff_format = {
-                    append_args = { "--line-length", "88" },
-                },
             },
         },
         init = function()
