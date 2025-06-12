@@ -50,7 +50,21 @@ return {
                     { name = "luasnip" },
                 }, {
                     { name = "rg", keyword_length = 4, max_item_count = 4 },
-                    { name = "treesitter", keyword_length = 4, max_item_count = 4 },
+                    {
+                        name = "treesitter",
+                        keyword_length = 4,
+                        max_item_count = 4,
+                        option = {
+                            get_bufnrs = function()
+                                local buf = vim.api.nvim_get_current_buf()
+                                local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+                                if byte_size > 128 * 1024 then -- 128 Kilobytes max
+                                    return {}
+                                end
+                                return { buf }
+                            end,
+                        },
+                    },
                     {
                         name = "buffer",
                         keyword_length = 4,
