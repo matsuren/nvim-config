@@ -30,6 +30,7 @@ return {
                 typescript = { "biome" },
                 typescriptreact = { "biome" },
                 go = { "gofumpt" },
+                html = { "prettier" },
             },
             default_format_opts = {
                 lsp_format = "fallback",
