@@ -11,6 +11,12 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
         vim.cmd("cwindow")
     end,
 })
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = { "*.swiftinterface" },
+    callback = function()
+        vim.bo.ft = "swift"
+    end,
+})
 
 -- Keymap for filetype
 -- Kulala

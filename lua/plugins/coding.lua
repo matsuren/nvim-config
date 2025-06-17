@@ -233,6 +233,10 @@ return {
             lspconfig.biome.setup({ capabilities = capabilities })
             lspconfig.typos_lsp.setup({})
             lspconfig.gopls.setup({ capabilities = capabilities })
+            lspconfig.sourcekit.setup({
+                single_file_support = true,
+                filetypes = { "swift" },
+            })
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
             -- lspconfig.jsonls.setup({ capabilities = capabilities })
             vim.lsp.inlay_hint.enable(true)
