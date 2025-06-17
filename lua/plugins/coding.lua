@@ -69,6 +69,7 @@ return {
     },
     {
         "williamboman/mason.nvim",
+        version = "^1.0.0",
         config = function()
             local configs = require("mason")
             configs.setup({
@@ -84,6 +85,7 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
+        version = "^1.0.0",
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
