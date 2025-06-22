@@ -193,7 +193,7 @@ return {
                     "--background-index",
                     "--query-driver="
                         .. os.getenv("HOME")
-                        .. "/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-g*",
+                        .. "/.platformio/packages/toolchain-riscv32-esp/bin/riscv32-esp-elf-g*",
                 },
                 filetypes = { "c", "cpp" },
             })
