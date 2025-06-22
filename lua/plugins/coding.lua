@@ -237,6 +237,7 @@ return {
                 single_file_support = true,
                 filetypes = { "swift" },
             })
+            lspconfig.zls.setup({ capabilities = capabilities })
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
             -- lspconfig.jsonls.setup({ capabilities = capabilities })
             vim.lsp.inlay_hint.enable(true)
