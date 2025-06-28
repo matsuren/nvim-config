@@ -562,4 +562,7 @@ return {
             })
         end,
     },
+    {
+        "sakhnik/nvim-gdb",
+    },
 }
