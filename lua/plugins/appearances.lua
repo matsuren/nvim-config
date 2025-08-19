@@ -161,6 +161,7 @@ return {
     {
         -- Loading ui on bottom right
         "j-hui/fidget.nvim",
+        version = "1.6.1",
         opts = {
             -- options
         },
