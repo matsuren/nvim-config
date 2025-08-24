@@ -249,17 +249,19 @@ return {
                 languages = { "vue" },
                 configNamespace = "typescript",
             }
-            local ts_ls_config = {
-                init_options = {
-                    plugins = {
-                        vue_plugin,
+            local vtsls_config = {
+                settings = {
+                    vtsls = {
+                        tsserver = {
+                            globalPlugins = {
+                                vue_plugin,
+                            },
+                        },
                     },
                 },
                 filetypes = tsserver_filetypes,
-                capabilities = capabilities,
             }
-            lspconfig.ts_ls.setup(ts_ls_config)
-            lspconfig.vue_ls.setup({})
+            lspconfig.vtsls.setup(vtsls_config)
             lspconfig.graphql.setup({ capabilities = capabilities })
             vim.lsp.inlay_hint.enable(true)
             local base_severity = vim.diagnostic.severity.HINT
