@@ -260,6 +260,7 @@ return {
             }
             lspconfig.ts_ls.setup(ts_ls_config)
             lspconfig.vue_ls.setup({})
+            lspconfig.graphql.setup({ capabilities = capabilities })
             vim.lsp.inlay_hint.enable(true)
             local base_severity = vim.diagnostic.severity.HINT
             vim.diagnostic.config({
