@@ -6,6 +6,7 @@ return {
         build = "cd app && npm install",
         init = function()
             vim.g.mkdp_filetypes = { "markdown" }
+            vim.g.mkdp_open_to_the_world = 1 -- access from other devices
         end,
         ft = { "markdown" },
     },
