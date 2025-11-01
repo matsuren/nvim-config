@@ -37,6 +37,9 @@ return {
                     },
                 },
                 pickers = {
+                    buffers = {
+                        sort_lastused = true,
+                    },
                     find_files = {
                         hidden = true,
                     },
