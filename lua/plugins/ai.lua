@@ -1,0 +1,28 @@
+if vim.loop.os_gethostname() ~= "ren-thinkpad" then
+    return {}
+end
+
+vim.g.copilot_no_tab_map = true
+vim.keymap.set("i", "<S-Tab>", 'copilot#Accept("\\<S-Tab>")', { expr = true, replace_keycodes = false })
+
+return {
+    {
+        "github/copilot.vim",
+    },
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        dependencies = {
+            { "nvim-lua/plenary.nvim", branch = "master" },
+        },
+        build = "make tiktoken",
+        opts = {
+            mappings = {
+                -- unbind C-l to reset chat
+                reset = {
+                    normal = "",
+                    insert = "",
+                },
+            },
+        },
+    },
+}
