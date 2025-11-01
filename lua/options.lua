@@ -34,6 +34,7 @@ local options = {
     signcolumn = "yes:1",
     -- Limit max number of completion items
     pumheight = 12,
+    splitright = true,
 }
 
 for k, v in pairs(options) do
