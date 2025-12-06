@@ -20,7 +20,7 @@ return {
                 lua = { "stylua" },
                 python = { "ruff_format" },
                 xml = { "xmlformat" },
-                yaml = { "yq" },
+                yaml = { "yamlfmt" },
                 markdown = { "prettier" },
                 json = { "biome" },
                 css = { "biome" },
