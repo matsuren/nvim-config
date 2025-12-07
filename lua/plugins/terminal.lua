@@ -14,12 +14,7 @@ return {
                         return 20
                     end
                 end,
-                open_mapping = [[<c-_>]], -- Maps Ctrl-/ to open the terminal
-                direction = "float",
-                float_opts = {
-                    border = "curved",
-                    winblend = 0,
-                },
+                open_mapping = nil,
             })
         end,
     },
