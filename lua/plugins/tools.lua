@@ -8,6 +8,5 @@ return {
         opts = {
             global_keymaps = false, -- Set keymap in autocmds,lua
         },
-        opts = {},
     },
 }
