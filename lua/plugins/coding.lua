@@ -156,17 +156,6 @@ return {
         end,
     },
     {
-        "luckasRanarison/tailwind-tools.nvim",
-        name = "tailwind-tools",
-        build = ":UpdateRemotePlugins",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-telescope/telescope.nvim", -- optional
-            "neovim/nvim-lspconfig", -- optional
-        },
-        opts = {}, -- your configuration
-    },
-    {
         "windwp/nvim-ts-autotag",
         event = { "BufNewFile", "BufReadPre" },
         config = function()
@@ -183,10 +172,9 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local lspconfig = require("lspconfig")
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
             -- PlatformIO setting
-            lspconfig.clangd.setup({
+            vim.lsp.config("clangd", {
                 capabilities = capabilities,
                 cmd = {
                     "clangd",
@@ -197,14 +185,14 @@ return {
                 },
                 filetypes = { "c", "cpp" },
             })
-            lspconfig.ruff.setup({
+            vim.lsp.config("ruff", {
                 capabilities = capabilities,
                 on_attach = function(client, bufnr)
                     -- Disable hover in favor of Pyright
                     client.server_capabilities.hoverProvider = false
                 end,
             })
-            lspconfig.basedpyright.setup({
+            vim.lsp.config("basedpyright", {
                 capabilities = capabilities,
                 settings = {
                     basedpyright = {
@@ -230,39 +218,13 @@ return {
                     },
                 },
             })
-            lspconfig.biome.setup({ capabilities = capabilities })
-            lspconfig.typos_lsp.setup({})
-            lspconfig.gopls.setup({ capabilities = capabilities })
-            lspconfig.sourcekit.setup({
-                single_file_support = true,
-                filetypes = { "swift" },
-            })
-            lspconfig.zls.setup({ capabilities = capabilities })
+            vim.lsp.config("biome", { capabilities = capabilities })
+            vim.lsp.config("typos_lsp", {})
+            vim.lsp.config("gopls", { capabilities = capabilities })
+            vim.lsp.config("zls", { capabilities = capabilities })
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
             -- lspconfig.jsonls.setup({ capabilities = capabilities })
-            local vue_language_server_path = vim.fn.stdpath("data")
-                .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
-            local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
-            local vue_plugin = {
-                name = "@vue/typescript-plugin",
-                location = vue_language_server_path,
-                languages = { "vue" },
-                configNamespace = "typescript",
-            }
-            local vtsls_config = {
-                settings = {
-                    vtsls = {
-                        tsserver = {
-                            globalPlugins = {
-                                vue_plugin,
-                            },
-                        },
-                    },
-                },
-                filetypes = tsserver_filetypes,
-            }
-            lspconfig.vtsls.setup(vtsls_config)
-            lspconfig.graphql.setup({ capabilities = capabilities })
+            vim.lsp.config("graphql", { capabilities = capabilities })
             vim.lsp.inlay_hint.enable(true)
             local base_severity = vim.diagnostic.severity.HINT
             vim.diagnostic.config({
@@ -413,12 +375,9 @@ return {
         "linux-cultist/venv-selector.nvim",
         dependencies = {
             "neovim/nvim-lspconfig",
-            "mfussenegger/nvim-dap",
-            "mfussenegger/nvim-dap-python", --optional
             { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
         },
-        lazy = false,
-        branch = "regexp", -- This is the regexp branch, use this for the new version
+        ft = "python",
         keys = {
             { "<leader>cv", "<cmd>VenvSelect<cr>" },
         },
