@@ -84,20 +84,17 @@ return {
         end,
     },
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         version = "^2.0.0",
+        opts = {},
+        dependencies = {
+            { "mason-org/mason.nvim", opts = {} },
+            "neovim/nvim-lspconfig",
+        },
         config = function()
             require("mason-lspconfig").setup({
+                automatic_enable = false,
                 ensure_installed = {
-                    "basedpyright",
-                    "biome",
-                    "clangd",
-                    "gopls",
-                    "jsonls",
-                    "lua_ls",
-                    "ruff",
-                    "rust_analyzer",
-                    "tailwindcss",
                     "typos_lsp",
                 },
             })
@@ -173,6 +170,7 @@ return {
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
             -- lspconfig.jsonls.setup({ capabilities = capabilities })
             vim.lsp.config("graphql", { capabilities = capabilities })
+            vim.lsp.enable({ "typos_lsp", "ruff", "basedpyright", "biome" })
             vim.lsp.inlay_hint.enable(true)
             local base_severity = vim.diagnostic.severity.HINT
             vim.diagnostic.config({
