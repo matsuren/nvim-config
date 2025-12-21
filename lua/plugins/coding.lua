@@ -170,7 +170,11 @@ return {
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
             -- lspconfig.jsonls.setup({ capabilities = capabilities })
             vim.lsp.config("graphql", { capabilities = capabilities })
-            vim.lsp.enable({ "typos_lsp", "ruff", "basedpyright", "biome" })
+            if vim.loop.os_gethostname() == "ren-thinkpad" then
+                vim.lsp.enable({ "typos_lsp", "ruff", "basedpyright", "biome", "gopls" })
+            else
+                vim.lsp.enable({ "typos_lsp", "ruff", "basedpyright", "biome" })
+            end
             vim.lsp.inlay_hint.enable(true)
             local base_severity = vim.diagnostic.severity.HINT
             vim.diagnostic.config({
