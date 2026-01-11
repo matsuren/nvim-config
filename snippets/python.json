@@ -1,4 +1,8 @@
 {
+  "Python pdbpp breakpoint": {
+    "prefix": "pb",
+    "body": "__import__(\"pdbpp\").set_trace()$0"
+  },
   "IPython pdb breakpoint": {
     "prefix": "ipyb",
     "body": "__import__(\"IPython.core.debugger\", fromlist=[\"Pdb\"]).Pdb().set_trace()$0"
