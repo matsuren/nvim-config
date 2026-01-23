@@ -1,4 +1,8 @@
 {
+  "Python breakpoint": {
+    "prefix": "bp",
+    "body": "breakpoint()$0"
+  },
   "Python pdbpp breakpoint": {
     "prefix": "pb",
     "body": "__import__(\"pdbpp\").set_trace()$0"
