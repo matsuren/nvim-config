@@ -53,35 +53,40 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Handle large file
-vim.api.nvim_create_autocmd({ "BufReadPre" }, {
-    pattern = "*",
-    callback = function()
-        local file = vim.fn.expand("<afile>")
-        local size = vim.fn.getfsize(file)
-        local max_filesize = 3 * 1024 * 1024 -- 3 MB
-
-        if size > max_filesize then
-            -- -- Disable Treesitter
-            require("nvim-treesitter.configs").setup({
-                highlight = {
-                    enable = false,
-                },
-                indent = {
-                    enable = false,
-                },
-                textobjects = {
-                    select = {
-                        enable = false,
-                    },
-                },
-            })
+vim.api.nvim_create_autocmd("BufReadPre", {
+    callback = function(args)
+        local name = vim.api.nvim_buf_get_name(args.buf)
+        if name == "" then
+            return
+        end
+        local ok, stat = pcall(vim.uv.fs_stat, name)
+        if ok and stat and stat.size > 3 * 1024 * 1024 then
+            -- Disable fold
+            vim.opt_local.foldmethod = "manual"
+            vim.opt_local.foldexpr = "0"
+            vim.opt_local.foldenable = false
+        end
+        if ok and stat and stat.size > 6 * 1024 * 1024 then
+            vim.b[args.buf].large_file = true
             -- Disable nvim-cmp
             require("cmp").setup.buffer({ enabled = false })
+        end
+        if ok and stat and stat.size > 20 * 1024 * 1024 then
             -- Disable syntax highlighting
             vim.cmd("syntax off")
             -- Disable some other features
             vim.cmd("set eventignore+=BufRead,BufEnter")
         end
+    end,
+})
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    callback = function(args)
+        if not vim.b[args.buf].large_file then
+            return
+        end
+        vim.opt_local.foldmethod = "manual"
+        vim.opt_local.foldexpr = "0"
     end,
 })
 

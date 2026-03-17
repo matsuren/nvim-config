@@ -7,19 +7,47 @@ return {
             {
                 "nvim-treesitter/nvim-treesitter-context",
                 config = function()
+                    local function is_large_file(buf)
+                        local max_filesize = 3 * 1024 * 1024
+                        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
+                        return ok and stats and stats.size > max_filesize
+                    end
+
                     require("treesitter-context").setup({
-                        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-                        max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
-                        min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-                        multiline_threshold = 20, -- Maximum number of lines to show for a single context
-                        trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-                        mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
+                        enable = true,
+                        max_lines = 2,
+                        min_window_height = 0,
+                        multiline_threshold = 20,
+                        trim_scope = "outer",
+                        mode = "cursor",
+                    })
+
+                    vim.api.nvim_create_autocmd("BufEnter", {
+                        callback = function(args)
+                            if is_large_file(args.buf) then
+                                pcall(vim.cmd, "TSContextDisable")
+                            else
+                                pcall(vim.cmd, "TSContextEnable")
+                            end
+                        end,
                     })
                 end,
             },
         },
         config = function()
             local configs = require("nvim-treesitter.configs")
+
+            local max_filesize = 3 * 1024 * 1024 -- 3 MB
+
+            local function is_large_file(buf)
+                local name = vim.api.nvim_buf_get_name(buf)
+                if name == "" then
+                    return false
+                end
+
+                local ok, stat = pcall(vim.uv.fs_stat, name)
+                return ok and stat and stat.size > max_filesize
+            end
 
             configs.setup({
                 ensure_installed = {
@@ -43,11 +71,19 @@ return {
                 },
                 auto_install = true,
                 sync_install = false,
-                highlight = { enable = true },
+                highlight = {
+                    enable = true,
+                    disable = function(_, buf)
+                        return is_large_file(buf)
+                    end,
+                },
                 indent = { enable = false }, -- Doesn't work for tsx
                 textobjects = {
                     select = {
                         enable = true,
+                        disable = function(_, buf)
+                            return is_large_file(buf)
+                        end,
                         -- Automatically jump forward to textobj, similar to targets.vim
                         lookahead = true,
                         keymaps = {

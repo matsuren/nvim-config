@@ -41,6 +41,8 @@ local options = {
     foldlevel = 99,
     foldlevelstart = 99,
     foldenable = true,
+    -- syntax
+    synmaxcol = 300,
 }
 
 for k, v in pairs(options) do
