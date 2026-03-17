@@ -176,6 +176,16 @@ return {
                 vim.lsp.enable({ "typos_lsp", "ruff", "basedpyright", "biome" })
             end
             vim.lsp.inlay_hint.enable(true)
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("LspFoldingOverride", { clear = true }),
+                callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if client and client.supports_method("textDocument/foldingRange") then
+                        vim.wo.foldmethod = "expr"
+                        vim.wo.foldexpr = "v:lua.vim.lsp.foldexpr()"
+                    end
+                end,
+            })
             local base_severity = vim.diagnostic.severity.HINT
             vim.diagnostic.config({
                 -- Check keymap for cycling diagnostic severity levels

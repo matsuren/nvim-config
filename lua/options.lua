@@ -35,6 +35,12 @@ local options = {
     -- Limit max number of completion items
     pumheight = 12,
     splitright = true,
+    -- Fold
+    foldmethod = "expr",
+    foldexpr = "v:lua.vim.treesitter.foldexpr()",
+    foldlevel = 99,
+    foldlevelstart = 99,
+    foldenable = true,
 }
 
 for k, v in pairs(options) do
