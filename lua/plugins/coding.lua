@@ -288,9 +288,9 @@ return {
                 layout = { default_direction = "prefer_left" },
                 highlight_on_jump = false,
                 -- Disable aerial on files with this many lines
-                disable_max_lines = 10000,
+                disable_max_lines = 50000000,
                 -- Disable aerial on files this size or larger (in bytes)
-                disable_max_size = 2000000, -- Default 2MB
+                disable_max_size = 10000000,
                 -- A list of all symbols to display. Set to false to display all symbols.
                 -- This can be a filetype map (see :help aerial-filetype-map)
                 -- To see all available values, see :help SymbolKind
