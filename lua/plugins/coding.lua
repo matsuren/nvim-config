@@ -296,16 +296,18 @@ return {
                 -- This can be a filetype map (see :help aerial-filetype-map)
                 -- To see all available values, see :help SymbolKind
                 filter_kind = {
+                    "Array",
                     "Class",
                     "Constructor",
                     "Enum",
+                    "Event",
                     "Function",
                     "Interface",
-                    "Module",
-                    "Method",
-                    "Struct",
                     "Key",
-                    "Array",
+                    "Method",
+                    "Module",
+                    "Property",
+                    "Struct",
                 },
             })
         end,
