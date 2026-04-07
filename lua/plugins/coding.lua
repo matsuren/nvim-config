@@ -74,8 +74,9 @@ return {
                 sync_install = false,
                 highlight = {
                     enable = true,
-                    disable = function(_, buf)
-                        return is_large_file(buf)
+                    disable = function(lang, buf)
+                        -- default csv syntax highlight is better
+                        return lang == "csv" or is_large_file(buf)
                     end,
                 },
                 indent = { enable = false }, -- Doesn't work for tsx
