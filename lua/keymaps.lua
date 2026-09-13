@@ -186,45 +186,5 @@ vim.keymap.set("n", "<leader>cH", "<Cmd>DiffviewFileHistory<CR>", { desc = "Git 
 vim.keymap.set("n", "<leader>cc", require("telescope.builtin").git_status, { desc = "Find git changes" })
 vim.keymap.set("n", "<leader>cb", "<Cmd>G blame<CR>", { desc = "Git blame" })
 
--- Terminal
-vim.keymap.set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>", { desc = "Open terminal vertically" })
-local Terminal = require("toggleterm.terminal").Terminal
-local ipython = Terminal:new({
-    cmd = "ipython3",
-    direction = "vertical",
-    id = 99,
-})
--- Terminal ipython setting
-vim.keymap.set("n", "<leader>tp", function()
-    ipython:toggle()
-end, { desc = "Open IPython vertically" })
-function _G.set_terminal_keymaps()
-    local opts = { noremap = true }
-    vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
-    vim.keymap.set(
-        "n",
-        "<leader>ts",
-        string.format("<Cmd>ToggleTermSendCurrentLine %d<CR>", ipython.id),
-        { desc = "Send current line to ipython terminal" }
-    )
-    -- vim.keymap.set("v", "<leader>ts", "<Cmd>ToggleTermSendVisualLines<CR>", { desc = "Send selected line to terminal" })
-    vim.keymap.set("v", "<leader>ts", function()
-        vim.api.nvim_feedkeys('"+y', "v", true)
-        require("toggleterm").exec("%paste", ipython.id)
-    end, { desc = "Send @paste to ipython terminal" })
-    -- Keymap to run the current file in IPython
-    vim.keymap.set("n", "<leader>tt", function()
-        vim.cmd("write")
-        local file = vim.fn.expand("%") -- Get the current file
-        require("toggleterm").exec("%run " .. file, ipython.id)
-    end, { desc = "Run current file in IPython" })
-end
-vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
-
 -- HakonHarnes/img-clip.nvim
 vim.keymap.set("n", "<Leader>p", "<cmd>PasteImage<cr>", { desc = "Paste image from system clipboard" })

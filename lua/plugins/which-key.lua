@@ -7,6 +7,9 @@ return {
             vim.o.timeoutlen = 500
         end,
         opts = {
+            filter = function(mapping)
+                return mapping.desc ~= "which_key_ignore"
+            end,
             layout = {
                 width = { min = 30 },
                 spacing = 3,
