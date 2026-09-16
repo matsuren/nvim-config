@@ -208,10 +208,25 @@ return {
             -- lspconfig.rust_analyzer.setup({ capabilities = capabilities }) -- rustaceanvim handle this part
             -- lspconfig.jsonls.setup({ capabilities = capabilities })
             vim.lsp.config("graphql", { capabilities = capabilities })
-            if vim.loop.os_gethostname() == "ren-thinkpad" then
-                vim.lsp.enable({ "typos_lsp", "ruff", "basedpyright", "biome", "gopls" })
-            else
-                vim.lsp.enable({ "typos_lsp", "ruff", "basedpyright", "biome" })
+            vim.lsp.config("julials", {
+                capabilities = capabilities,
+                cmd = {
+                    "julia",
+                    "--startup-file=no",
+                    "--history-file=no",
+                    "-e",
+                    [[
+                        pushfirst!(LOAD_PATH, joinpath(first(DEPOT_PATH), "environments", "nvim-lspconfig"))
+                        using LanguageServer
+                        popfirst!(LOAD_PATH)
+                        LanguageServer.runserver()
+                    ]],
+                },
+            })
+            vim.lsp.enable({ "typos_lsp", "ruff", "basedpyright", "biome" })
+            local hostname = vim.uv.os_gethostname()
+            if hostname == "ren-thinkpad" or hostname == "rkmb.local" then
+                vim.lsp.enable({ "gopls", "julials" })
             end
             vim.lsp.inlay_hint.enable(true)
             vim.api.nvim_create_autocmd("LspAttach", {
