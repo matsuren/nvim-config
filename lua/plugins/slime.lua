@@ -21,7 +21,7 @@ return {
                 end
             end
             if #terminals == 0 then
-                vim.notify("Open a REPL with Space ro first", vim.log.levels.WARN)
+                vim.notify("Open a REPL first", vim.log.levels.WARN)
                 return
             end
             vim.ui.select(terminals, {
@@ -79,6 +79,10 @@ return {
                 vim.b[event.buf].slime_cell_delimiter = filetype == "haskell" and "^\\s*--\\s*%%" or "^\\s*#\\s*%%"
                 vim.keymap.set("n", "<leader>ro", function()
                     terminal:toggle()
+                    if filetype == "python" then
+                        vim.b[event.buf].slime_bracketed_paste = 0
+                        vim.b[event.buf].slime_python_ipython = 1
+                    end
                     vim.b[event.buf].slime_config = {
                         jobid = terminal.job_id,
                         pid = vim.fn.jobpid(terminal.job_id),
@@ -119,6 +123,14 @@ return {
                     end
                 end
                 refresh[event.buf]()
+                if filetype == "julia" or filetype == "python" then
+                    vim.keymap.set("n", "<leader>rJ", function()
+                        require("jupyter_viewer").open(event.buf, refresh[event.buf])
+                    end, { buffer = event.buf, desc = "Jupyter terminal + browser (auto setup)" })
+                    vim.keymap.set("n", "<leader>ij", function()
+                        require("jupyter_viewer").open(event.buf, refresh[event.buf])
+                    end, { buffer = event.buf, desc = "Jupyter terminal + browser viewer" })
+                end
             end,
         })
         vim.api.nvim_create_autocmd({ "BufEnter", "TermClose" }, {
