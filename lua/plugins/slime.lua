@@ -92,6 +92,7 @@ return {
                 local mappings = {
                     { "n", "<S-CR>", "<Plug>SlimeCellsSendAndGoToNext", "Send cell and advance" },
                     { "i", "<S-CR>", "<Esc><Plug>SlimeCellsSendAndGoToNext", "Send cell and advance" },
+                    { { "n", "i" }, "<C-CR>", "<Cmd>call slime#send_cell()<CR>", "Send cell and stay" },
                     { { "x", "o" }, "ic", ":<C-u>call slime_cells#select_current_cell(0)<CR>", "Select cell contents" },
                     { { "x", "o" }, "ac", ":<C-u>call slime_cells#select_current_cell(1)<CR>", "Select cell with delimiter" },
                     { "n", "<leader>rn", "<Plug>SlimeCellsSendAndGoToNext", "Send cell and advance" },
