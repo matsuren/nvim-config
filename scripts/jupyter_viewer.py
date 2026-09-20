@@ -304,6 +304,7 @@ def main() -> None:
                 url = base + "/lab/workspaces/nvim-jupyter?token=" + token
                 connection = root / "runtime" / f"kernel-{kernel_id}.json"
                 webbrowser.open(url)
+                print(f"JupyterLab (reopen in any browser): {url}", flush=True)
                 print(
                     "Browser console connected. Send code with your configured slime mappings.",
                     flush=True,
