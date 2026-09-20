@@ -53,7 +53,6 @@ return {
         end, { desc = "Insert cell delimiter above current line" })
         local terminals = {}
         for filetype, command in pairs({
-            python = "ipython3",
             julia = "julia --project=.",
             haskell = "ghci",
         }) do
@@ -62,6 +61,29 @@ return {
                 direction = "vertical",
                 hidden = true,
             })
+        end
+
+        -- Python REPL from the environment selected with :VenvSelect so it
+        -- shares the interpreter and packages with the Jupyter kernel; the
+        -- plain interpreter is used when IPython is not installed there.
+        local function python_repl()
+            local ok, venv_selector = pcall(require, "venv-selector")
+            local python = ok and venv_selector.python() or nil
+            if not python then
+                vim.notify("Select a Python environment first with :VenvSelect", vim.log.levels.WARN)
+                return nil
+            end
+            local key = "python:" .. python
+            if not terminals[key] then
+                local ipython = vim.fs.joinpath(vim.fs.dirname(python), "ipython")
+                local command = vim.fn.executable(ipython) == 1 and ipython or python
+                terminals[key] = require("toggleterm.terminal").Terminal:new({
+                    cmd = command,
+                    direction = "vertical",
+                    hidden = true,
+                })
+            end
+            return terminals[key]
         end
 
         vim.api.nvim_create_autocmd("FileType", {
@@ -78,14 +100,19 @@ return {
                 vim.b[event.buf].slime_bracketed_paste = filetype == "julia" and 1 or 0
                 vim.b[event.buf].slime_cell_delimiter = filetype == "haskell" and "^\\s*--\\s*%%" or "^\\s*#\\s*%%"
                 vim.keymap.set("n", "<leader>ro", function()
-                    terminal:toggle()
+                    local repl = terminal
                     if filetype == "python" then
+                        repl = python_repl()
+                        if repl == nil then
+                            return
+                        end
                         vim.b[event.buf].slime_bracketed_paste = 0
-                        vim.b[event.buf].slime_python_ipython = 1
+                        vim.b[event.buf].slime_python_ipython = vim.endswith(repl.cmd, "ipython") and 1 or 0
                     end
+                    repl:toggle()
                     vim.b[event.buf].slime_config = {
-                        jobid = terminal.job_id,
-                        pid = vim.fn.jobpid(terminal.job_id),
+                        jobid = repl.job_id,
+                        pid = vim.fn.jobpid(repl.job_id),
                     }
                     refresh[event.buf]()
                 end, { buffer = event.buf, desc = "Open REPL" })
@@ -107,10 +134,18 @@ return {
                 if filetype == "python" then
                     table.insert(mappings, { "n", "<leader>rf", function()
                         vim.cmd("write")
+                        local repl = python_repl()
+                        if repl == nil then
+                            return
+                        end
+                        repl:open()
                         local file = vim.fn.expand("%:p")
-                        terminal:open()
-                        terminal:send("%run " .. vim.fn.fnameescape(file))
-                    end, "Run current file in IPython" })
+                        if vim.endswith(repl.cmd, "ipython") then
+                            repl:send("%run " .. vim.fn.fnameescape(file))
+                        else
+                            repl:send("exec(open(" .. vim.fn.shellescape(file) .. ").read())")
+                        end
+                    end, "Run current file in the REPL" })
                 end
                 refresh[event.buf] = function()
                     local active = connected()
