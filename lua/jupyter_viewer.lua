@@ -1,6 +1,14 @@
 local M = {}
 local terminals = {}
 
+local function connect(source, terminal)
+    vim.b[source].slime_config = { jobid = terminal.job_id, pid = vim.fn.jobpid(terminal.job_id) }
+    vim.b[source].slime_bracketed_paste = 1
+    if vim.bo[source].filetype == "python" then
+        vim.b[source].slime_python_ipython = 0
+    end
+end
+
 function M.open(source, refresh)
     local language = vim.bo[source].filetype
     if vim.fn.executable("uv") == 0 or (language == "julia" and vim.fn.executable("julia") == 0) then
@@ -22,13 +30,24 @@ function M.open(source, refresh)
     if language == "python" then
         local ok, venv_selector = pcall(require, "venv-selector")
         python = ok and venv_selector.python() or nil
-        if not python then
-            vim.notify("Select a Python environment first with :VenvSelect", vim.log.levels.WARN)
-            return
-        end
     end
-    local key = language .. ":" .. project .. ":" .. (python or "")
+    local key = language .. ":" .. project
     local terminal = terminals[key]
+    if terminal and terminal.job_id and vim.fn.jobwait({ terminal.job_id }, 0)[1] == -1 then
+        local config = vim.b[source].slime_config
+        if config and tonumber(config.jobid) == terminal.job_id then
+            terminal:toggle() -- already attached: show/hide the console
+        else
+            connect(source, terminal)
+            vim.notify("Attached to the running Jupyter kernel for this project.", vim.log.levels.INFO)
+        end
+        refresh()
+        return
+    end
+    if language == "python" and not python then
+        vim.notify("Select a Python environment first with :VenvSelect", vim.log.levels.WARN)
+        return
+    end
     if not terminal then
         local script = vim.fn.stdpath("config") .. "/scripts/jupyter_viewer.py"
         local kernel_env = vim.fn.stdpath("data") .. "/" .. language .. "-kernel"
@@ -51,11 +70,7 @@ function M.open(source, refresh)
         terminals[key] = terminal
     end
     terminal:toggle()
-    vim.b[source].slime_config = { jobid = terminal.job_id, pid = vim.fn.jobpid(terminal.job_id) }
-    vim.b[source].slime_bracketed_paste = 1
-    if language == "python" then
-        vim.b[source].slime_python_ipython = 0
-    end
+    connect(source, terminal)
     refresh()
 end
 
