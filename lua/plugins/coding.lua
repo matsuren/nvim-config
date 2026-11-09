@@ -263,6 +263,17 @@ return {
         "mrcjkb/rustaceanvim",
         version = "^5", -- Recommended
         lazy = false, -- This plugin is already lazy
+        init = function()
+            vim.g.rustaceanvim = {
+                server = {
+                    default_settings = {
+                        ["rust-analyzer"] = {
+                            completion = { autoimport = { enable = false } },
+                        },
+                    },
+                },
+            }
+        end,
     },
     {
         "linux-cultist/venv-selector.nvim",
