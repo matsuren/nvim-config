@@ -271,8 +271,53 @@ return {
                             completion = { autoimport = { enable = false } },
                         },
                     },
+                    -- Neovim 0.11 doesn't implement workspace/diagnostic/refresh, so pull diagnostics
+                    -- ("inactive code") stay stale once rust-analyzer finishes (re)loading a project.
+                    -- Neovim 0.12 handles it natively: delete `capabilities` and `handlers` after upgrading.
+                    capabilities = { workspace = { diagnostics = { refreshSupport = true } } },
+                    handlers = {
+                        ["workspace/diagnostic/refresh"] = function(_, _, ctx)
+                            local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+                            for _, bufnr in ipairs(vim.lsp.get_buffers_by_client_id(ctx.client_id)) do
+                                local params = { textDocument = vim.lsp.util.make_text_document_params(bufnr) }
+                                client:request("textDocument/diagnostic", params, nil, bufnr)
+                            end
+                            return vim.NIL
+                        end,
+                    },
                 },
             }
+            vim.api.nvim_create_user_command("RustFeatures", function(opts)
+                assert(vim.bo.filetype == "rust", ":RustFeatures needs a Rust buffer")
+                -- Assigned, not vim.lsp.config(name, cfg): that form deep-merges, so an empty list
+                -- wouldn't clear the previous one. rustaceanvim merges this in on every start.
+                vim.lsp.config["rust-analyzer"] = {
+                    default_settings = { ["rust-analyzer"] = { cargo = { features = opts.fargs } } },
+                }
+                vim.cmd.RustAnalyzer("restart")
+                local enabled = #opts.fargs > 0 and table.concat(opts.fargs, ", ") or "defaults only"
+                vim.notify("rust-analyzer features: " .. enabled)
+            end, {
+                nargs = "*",
+                desc = "Set rust-analyzer cargo features; no arguments restores the defaults",
+                complete = function(arg_lead)
+                    local crate_dir = assert(vim.fs.root(0, "Cargo.toml"), "no Cargo.toml")
+                    local manifest = vim.fs.joinpath(crate_dir, "Cargo.toml")
+                    local command = { "cargo", "metadata", "--no-deps", "--offline", "--format-version=1" }
+                    local metadata = vim.system(command, { text = true, cwd = crate_dir }):wait()
+                    assert(metadata.code == 0, metadata.stderr)
+                    local crate = assert(
+                        vim.iter(vim.json.decode(metadata.stdout).packages):find(function(package)
+                            return package.manifest_path == manifest
+                        end),
+                        "no package for " .. manifest
+                    )
+                    crate.features.default = nil
+                    return vim.tbl_filter(function(name)
+                        return vim.startswith(name, arg_lead)
+                    end, vim.fn.sort(vim.tbl_keys(crate.features)))
+                end,
+            })
         end,
     },
     {
