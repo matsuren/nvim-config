@@ -28,6 +28,10 @@ return {
         },
         config = function()
             require("neo-tree").setup({
+                -- neo-tree lists directories before files by default; sort purely by name instead
+                sort_function = function(a, b)
+                    return a.path < b.path
+                end,
                 source_selector = {
                     winbar = true,
                     statusline = true,
