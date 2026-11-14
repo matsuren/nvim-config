@@ -45,8 +45,8 @@ vim.keymap.set("v", "<C-Left>", "b", { noremap = true, silent = true })
 -- Navigate Quickfix List
 vim.keymap.set("n", "[q", ":cprevious<CR>", { silent = true, noremap = true, desc = "Previous quickfix item" })
 vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true, noremap = true, desc = "Next quickfix item" })
-vim.keymap.set("n", "[Q", ":cfirst<CR>", { silent = true, noremap = true, desc = "First quickfix item" })
-vim.keymap.set("n", "]Q", ":clast<CR>", { silent = true, noremap = true, desc = "Last quickfix item" })
+vim.keymap.set("n", "[Q", ":colder<CR>", { silent = true, noremap = true, desc = "Older quickfix list" })
+vim.keymap.set("n", "]Q", ":cnewer<CR>", { silent = true, noremap = true, desc = "Newer quickfix list" })
 -- Navigate Location List
 vim.keymap.set("n", "[l", ":lprevious<CR>", { silent = true, noremap = true, desc = "Previous location list item" })
 vim.keymap.set("n", "]l", ":lnext<CR>", { silent = true, noremap = true, desc = "Next location list item" })
