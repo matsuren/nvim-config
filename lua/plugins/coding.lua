@@ -50,6 +50,19 @@ return {
                 return ok and stat and stat.size > max_filesize
             end
 
+            -- With treesitter highlighting on, matchparen costs ~10 ms per 1000 chars of line
+            -- on every bracket, so minified one-line bundles take seconds per cursor move.
+            local max_line_length = 3000
+
+            local function has_long_line(buf)
+                for _, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
+                    if #line > max_line_length then
+                        return true
+                    end
+                end
+                return false
+            end
+
             configs.setup({
                 ensure_installed = {
                     "c",
@@ -76,7 +89,7 @@ return {
                     enable = true,
                     disable = function(lang, buf)
                         -- default csv syntax highlight is better
-                        return lang == "csv" or is_large_file(buf)
+                        return lang == "csv" or is_large_file(buf) or has_long_line(buf)
                     end,
                 },
                 indent = { enable = false }, -- Doesn't work for tsx
