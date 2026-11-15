@@ -4,7 +4,9 @@ return {
         branch = "master",
         build = ":TSUpdate",
         dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
+            -- Pin to master: the default branch (main) needs nvim-treesitter main (Neovim 0.12+)
+            -- and ignores the `textobjects` options below, so af/if would not be mapped.
+            { "nvim-treesitter/nvim-treesitter-textobjects", branch = "master" },
             {
                 "nvim-treesitter/nvim-treesitter-context",
                 config = function()
