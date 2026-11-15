@@ -93,7 +93,6 @@ vim.keymap.set("n", "<leader>fo", "<Cmd>Oil --float<CR>", { desc = "Oil: Open pa
 -- LSP
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go definition" })
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go declaration" })
-vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go reference" })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 vim.keymap.set({ "n", "v" }, "<leader>cf", function()
     require("conform").format({ async = true }, function(err)
