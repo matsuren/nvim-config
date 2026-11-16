@@ -276,7 +276,7 @@ return {
     },
     {
         "mrcjkb/rustaceanvim",
-        version = "^5", -- Recommended
+        version = "^8", -- v9+ requires Neovim 0.12
         lazy = false, -- This plugin is already lazy
         init = function()
             vim.g.rustaceanvim = {
@@ -289,7 +289,10 @@ return {
                     -- Neovim 0.11 doesn't implement workspace/diagnostic/refresh, so pull diagnostics
                     -- ("inactive code") stay stale once rust-analyzer finishes (re)loading a project.
                     -- Neovim 0.12 handles it natively: delete `capabilities` and `handlers` after upgrading.
-                    capabilities = { workspace = { diagnostics = { refreshSupport = true } } },
+                    -- rustaceanvim v6+ no longer adds nvim-cmp's completion capabilities by itself.
+                    capabilities = vim.tbl_deep_extend("force", require("cmp_nvim_lsp").default_capabilities(), {
+                        workspace = { diagnostics = { refreshSupport = true } },
+                    }),
                     handlers = {
                         ["workspace/diagnostic/refresh"] = function(_, _, ctx)
                             local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
