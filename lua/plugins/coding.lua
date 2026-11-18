@@ -284,6 +284,8 @@ return {
                     default_settings = {
                         ["rust-analyzer"] = {
                             completion = { autoimport = { enable = false } },
+                            -- Checks build into target/rust-analyzer, so they don't hold the lock cargo test needs.
+                            cargo = { targetDir = true },
                         },
                     },
                     -- Neovim 0.11 doesn't implement workspace/diagnostic/refresh, so pull diagnostics
